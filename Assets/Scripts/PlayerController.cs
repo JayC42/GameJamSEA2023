@@ -1,46 +1,117 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
-    Animator animator;
+    //Animator animator;
+    SquashAndStretch squashAndStretch;
 
+    [Header("Gravity")]
+    [SerializeField]
+    private float fallSpeed = 5f;
+
+    private float startFallSpeed;
+
+    private float fallSpeedMultiplier;
+
+    private float maxFallSpeed;
+
+    [SerializeField]
+    private float maxFallSpeedReg = 20f;
+
+    private float yVelocity;
+
+    private Vector2 moveInput;
+
+
+    [Header("Raycasts")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask wallLayer;
 
+    [Header("Basic Movement")]
     private float horizontal;
     private float speed = 8f;
+
+    [SerializeField]
+    private float minJumpStrength = 5f;
+    [SerializeField]
+    private float extraJumpStrength = 10f;
+    [SerializeField]
+    private float jumpHoldLength = 0.5f;
+    
+    private float jumpHoldTimer;
+
+    [SerializeField]
+    private float jumpBufferTime = 0.3f;
+
+    private float jumpBufferTimer;
+
+    private bool holdingJump;
     private float jumpingPower = 6f;
     private bool isFacingRight = true;
 
+    [Header("Wall Jump")]
+    [SerializeField]
     private bool isWallSliding;
+    [SerializeField]
     private float wallSlidingSpeed = 2f;
 
     private bool isWallJumping;
     private float wallJumpingDirection;
+    [SerializeField]
     private float wallJumpingTime = 0.2f;
     private float wallJumpingCounter;
+    [SerializeField]
     private float wallJumpingDuration = 0.4f;
+    [SerializeField]
     private Vector2 wallJumpingPower = new Vector2(8f, 8f);
+
+    [Header("Dash")]
+    [SerializeField]
+    private float dashDistance = 5f;
+    [SerializeField]
+    private float dashingPower = 24f;
+    [SerializeField]
+    private float dashingTime = 0.2f;
+    [SerializeField]
+    private float dashingCooldown = 1.5f;
+    private bool canDash = true;
+    private bool isDashing; 
+
+    [Header("Coyote Time")]
+    [SerializeField]
+    private float coyoteTime = 0.3f;
+    private float coyoteTimer;
+
+
+    [Header("Particles")]
+    [SerializeField]
+    private ParticleSystem jumpParticles;
+    [SerializeField]
+    private ParticleSystem landParticles;
+    [SerializeField]
+    private ParticleSystem dashParticles;
+    [SerializeField]
+    private ParticleSystem dashLingerParticles;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
+        squashAndStretch = GetComponent<SquashAndStretch>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        if (isDashing) return;
 
-        animator.SetFloat("Speed", Mathf.Abs(horizontal));
-        animator.SetBool("IsGrounded", IsGrounded());
-        animator.SetFloat("yVelocity", rb.velocity.y);
+        //BaseAnimations();
 
         if (!isFacingRight && horizontal > 0f)
         {
@@ -55,32 +126,60 @@ public class PlayerController : MonoBehaviour
 
         if (IsWalled())
         {
-            animator.SetBool("WallSlide", true);
-            animator.SetFloat("Speed", 0);
+            //animator.SetBool("WallSlide", true);
+            //animator.SetFloat("Speed", 0);
         }
         else
         {
-            animator.SetBool("WallSlide", false);
+            //animator.SetBool("WallSlide", false);
         }
 
         WallJump();
     }
-
+    private void BaseAnimations()
+    {
+        //animator.SetFloat("Speed", Mathf.Abs(horizontal));
+        //animator.SetBool("IsGrounded", IsGrounded());
+        //animator.SetFloat("yVelocity", rb.velocity.y);
+    }
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed && IsGrounded())
         {
+            print("Jump activated");
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-            animator.SetTrigger("Jump");
+            //animator.SetTrigger("Jump");
+            this.jumpParticles.Play();
+            StartCoroutine(AfterJump(0.9f));
         }
 
         if (context.canceled && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-            animator.SetTrigger("Jump");
+            //animator.SetTrigger("Jump");
         }
     }
+    private IEnumerator AfterJump(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        this.landParticles.Play();
+    }
+    private void FixedUpdate()
+    {
+        if (isDashing)
+        {
+            return;
+        }
 
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+    }
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if (context.performed && canDash)
+        {
+            StartCoroutine(Dash(dashDistance));
+        }
+    }
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
@@ -97,6 +196,7 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         horizontal = context.ReadValue<Vector2>().x;
+        this.dashLingerParticles.Play();
     }
 
     private bool IsWalled()
@@ -153,5 +253,28 @@ public class PlayerController : MonoBehaviour
     private void StopWallJumping()
     {
         isWallJumping = false;
+    }
+
+    private IEnumerator Dash(float dashDistance)
+    {
+        print("Dash activated");
+
+        //squashAndStretch.SquashStretch(1.3f, 0.8f, 0.3f);
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        // Calculate the dash velocity based on the dash distance
+        float dashVelocity = (dashDistance / dashingTime) * Mathf.Sign(transform.localScale.x);
+        rb.velocity = new Vector2(dashVelocity, rb.velocity.y);
+        //rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        this.dashParticles.Play();
+        yield return new WaitForSeconds(dashingTime);
+
+        // Stop dashing
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true; 
     }
 }
