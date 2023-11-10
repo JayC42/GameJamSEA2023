@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private float horizontal;
     private float speed = 8f;
-    private float jumpingPower = 14f;
+    private float jumpingPower = 6f;
     private bool isFacingRight = true;
 
     private bool isWallSliding;
@@ -26,18 +26,11 @@ public class PlayerController : MonoBehaviour
     private float wallJumpingDuration = 0.4f;
     private Vector2 wallJumpingPower = new Vector2(8f, 8f);
 
-    [Header("Damage")]
-    public int attackDamage = 1;
-
-    public CameraShake shake;
-    AudioManager audioManager;
-
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        audioManager = FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -75,19 +68,16 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (!PauseMenu.GameIsPaused)
+        if (context.performed && IsGrounded())
         {
-            if (context.performed && IsGrounded())
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-                animator.SetTrigger("Jump");
-            }
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            animator.SetTrigger("Jump");
+        }
 
-            if (context.canceled && rb.velocity.y > 0f)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-                animator.SetTrigger("Jump");
-            }
+        if (context.canceled && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            animator.SetTrigger("Jump");
         }
     }
 
@@ -106,59 +96,12 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (!PauseMenu.GameIsPaused)
-        {
-            horizontal = context.ReadValue<Vector2>().x;
-        }
-    }
-
-    public void Attack(InputAction.CallbackContext context)
-    {
-        if (!PauseMenu.GameIsPaused)
-        {
-            if (!Inventory.IsOpen)
-            {
-                if (context.performed && IsGrounded())
-                {
-                    animator.SetTrigger("Attack");
-                }
-                if (context.performed && !IsGrounded())
-                {
-                    animator.SetTrigger("AerialSlash");
-                }
-            }
-        }
-    }
-
-    public void AttackSFX()
-    {
-        audioManager.PlayerAttack();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            if (collision.gameObject.CompareTag("Enemy"))
-            {
-                collision.GetComponent<Enemy>().TakeDamage(attackDamage);
-                shake.ShakeCamera();
-            }
-        }
-        if (collision.CompareTag("Boss"))
-        {
-            if (collision.gameObject.CompareTag("Boss"))
-            {
-                collision.GetComponent<Boss>().TakeDamage(attackDamage);
-                shake.ShakeCamera();
-            }
-        }
+        horizontal = context.ReadValue<Vector2>().x;
     }
 
     private bool IsWalled()
     {
         return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
-
     }
 
     private void WallSlide()
