@@ -6,7 +6,7 @@ using Cinemachine;
 public class CameraShake : MonoBehaviour
 {
     private CinemachineVirtualCamera CinemachineVirtualCamera;
-    private float ShakeIntensity = 1f;
+    private float ShakeIntensity = 2f;
     private float ShakeTime = 0.2f;
 
     private float timer;
