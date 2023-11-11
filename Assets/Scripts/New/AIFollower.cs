@@ -20,7 +20,6 @@ public class AIFollower : MonoBehaviour
     void Update()
     {
         TargetFollow(); 
-        FlipSprite();
     }
     void TargetFollow()
     {
@@ -32,19 +31,6 @@ public class AIFollower : MonoBehaviour
         else
         {
             //anim.SetBool("Running", false);
-        }
-    }
-    void FlipSprite()
-    {
-        if (playerTransform.position.x > transform.position.x)
-        {
-            // face right
-            transform.localScale = new Vector3(1, 1, 1); 
-        }
-        else if (playerTransform.position.x < transform.position.x)
-        {
-            // face left
-            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 }
