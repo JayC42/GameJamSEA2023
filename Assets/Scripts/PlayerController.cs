@@ -8,23 +8,9 @@ public class PlayerController : MonoBehaviour
     //Animator animator;
     SquashAndStretch squashAndStretch;
 
-    [Header("Gravity")]
-    [SerializeField]
-    private float fallSpeed = 5f;
-
-    private float startFallSpeed;
-
-    private float fallSpeedMultiplier;
-
-    private float maxFallSpeed;
-
-    [SerializeField]
-    private float maxFallSpeedReg = 20f;
-
     private float yVelocity;
 
     private Vector2 moveInput;
-
 
     [Header("Raycasts")]
     [SerializeField] private Transform groundCheck;
@@ -51,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private float jumpBufferTimer;
 
     private bool holdingJump;
+    [SerializeField] 
     private float jumpingPower = 6f;
     private bool isFacingRight = true;
     private bool wasGrounded;

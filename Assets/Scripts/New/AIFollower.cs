@@ -20,31 +20,12 @@ public class AIFollower : MonoBehaviour
     void Update()
     {
         TargetFollow(); 
-        FlipSprite();
     }
     void TargetFollow()
     {
         if (Vector2.Distance(transform.position, target.position) > targetPosition)
         {
-            //anim.SetBool("Running", true);
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        }
-        else
-        {
-            //anim.SetBool("Running", false);
-        }
-    }
-    void FlipSprite()
-    {
-        if (playerTransform.position.x > transform.position.x)
-        {
-            // face right
-            transform.localScale = new Vector3(1, 1, 1); 
-        }
-        else if (playerTransform.position.x < transform.position.x)
-        {
-            // face left
-            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 }
