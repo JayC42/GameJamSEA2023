@@ -323,7 +323,6 @@ GameObject:
   - component: {fileID: 194382408}
   - component: {fileID: 194382407}
   - component: {fileID: 194382409}
-  - component: {fileID: 194382410}
   m_Layer: 0
   m_Name: Companion AI
   m_TagString: Untagged
@@ -389,22 +388,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &194382410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 194382406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d149ce85a7c4ba948ac4e9435e37b18d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  repeatLightTimer: 0.33
-  randomness: 0.1
-  minIntensity: 0.7
-  maxIntensity: 1.2
 --- !u!1 &257888429
 GameObject:
   m_ObjectHideFlags: 0
