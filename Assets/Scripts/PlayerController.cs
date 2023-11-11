@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private bool holdingJump;
     private float jumpingPower = 6f;
     private bool isFacingRight = true;
+    private bool wasGrounded;
 
     [Header("Wall Jump")]
     [SerializeField]
@@ -94,9 +95,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private ParticleSystem landParticles;
     [SerializeField]
-    private ParticleSystem dashParticles;
+    private ParticleSystem moveParticles;
     [SerializeField]
-    private ParticleSystem dashLingerParticles;
+    private ParticleSystem dashParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -109,9 +110,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDashing) return;
-
         //BaseAnimations();
+
+        if (!wasGrounded && IsGrounded())
+        {
+            this.landParticles.Play();
+        }
+        wasGrounded = IsGrounded();
+
+        if (isDashing) return;
 
         if (!isFacingRight && horizontal > 0f)
         {
@@ -149,8 +156,15 @@ public class PlayerController : MonoBehaviour
             print("Jump activated");
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             //animator.SetTrigger("Jump");
-            this.jumpParticles.Play();
-            StartCoroutine(AfterJump(0.9f));
+            if (jumpingPower < 6f)
+            {
+                squashAndStretch.SquashStretch(0.9f, 1.3f, 0.3f);
+                this.jumpParticles.Play();
+            }
+            else
+            {
+                squashAndStretch.SquashStretch(0.9f, 1.4f, 1f);
+            }
         }
 
         if (context.canceled && rb.velocity.y > 0f)
@@ -158,11 +172,6 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             //animator.SetTrigger("Jump");
         }
-    }
-    private IEnumerator AfterJump(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        this.landParticles.Play();
     }
     private void FixedUpdate()
     {
@@ -196,7 +205,7 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         horizontal = context.ReadValue<Vector2>().x;
-        this.dashLingerParticles.Play();
+        this.moveParticles.Play();
     }
 
     private bool IsWalled()
@@ -257,17 +266,16 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash(float dashDistance)
     {
-        print("Dash activated");
-
-        //squashAndStretch.SquashStretch(1.3f, 0.8f, 0.3f);
+        squashAndStretch.SquashStretch(1.3f, 0.8f, 0.3f);
         canDash = false;
         isDashing = true;
+
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
+
         // Calculate the dash velocity based on the dash distance
         float dashVelocity = (dashDistance / dashingTime) * Mathf.Sign(transform.localScale.x);
         rb.velocity = new Vector2(dashVelocity, rb.velocity.y);
-        //rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         this.dashParticles.Play();
         yield return new WaitForSeconds(dashingTime);
 
