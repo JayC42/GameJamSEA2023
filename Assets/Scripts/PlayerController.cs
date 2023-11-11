@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     //Animator animator;
     SquashAndStretch squashAndStretch;
+    public CameraShake shake;
 
     [Header("Gravity")]
     [SerializeField]
@@ -29,8 +30,8 @@ public class PlayerController : MonoBehaviour
     [Header("Raycasts")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private Transform wallCheck;
-    [SerializeField] private LayerMask wallLayer;
+    //[SerializeField] private Transform wallCheck;
+    //[SerializeField] private LayerMask wallLayer;
 
     [Header("Basic Movement")]
     private float horizontal;
@@ -129,17 +130,17 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
-        WallSlide();
+        //WallSlide();
 
-        if (IsWalled())
-        {
-            //animator.SetBool("WallSlide", true);
-            //animator.SetFloat("Speed", 0);
-        }
-        else
-        {
-            //animator.SetBool("WallSlide", false);
-        }
+        //if (IsWalled())
+        //{
+        //    animator.SetBool("WallSlide", true);
+        //    animator.SetFloat("Speed", 0);
+        //}
+        //else
+        //{
+        //    animator.SetBool("WallSlide", false);
+        //}
 
         WallJump();
     }
@@ -208,23 +209,23 @@ public class PlayerController : MonoBehaviour
         this.moveParticles.Play();
     }
 
-    private bool IsWalled()
-    {
-        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
-    }
+    //private bool IsWalled()
+    //{
+    //    return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
+    //}
 
-    private void WallSlide()
-    {
-        if (IsWalled() && !IsGrounded() && rb.velocity.y != 0f)
-        {
-            isWallSliding = true;
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
-        }
-        else
-        {
-            isWallSliding = false;
-        }
-    }
+    //private void WallSlide()
+    //{
+    //    if (IsWalled() && !IsGrounded() && rb.velocity.y != 0f)
+    //    {
+    //        isWallSliding = true;
+    //        rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+    //    }
+    //    else
+    //    {
+    //        isWallSliding = false;
+    //    }
+    //}
 
     private void WallJump()
     {
@@ -267,6 +268,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Dash(float dashDistance)
     {
         squashAndStretch.SquashStretch(1.3f, 0.8f, 0.3f);
+        shake.ShakeCamera();
         canDash = false;
         isDashing = true;
 

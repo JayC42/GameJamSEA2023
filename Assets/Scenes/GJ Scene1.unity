@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 88839643}
   - component: {fileID: 88839642}
   - component: {fileID: 88839644}
+  - component: {fileID: 88839645}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -213,6 +214,18 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 1239743402}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!114 &88839645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88839641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2360f30c5d3d94abf4b88f030bc585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &96110465
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,6 +791,7 @@ GameObject:
   - component: {fileID: 1085666805}
   - component: {fileID: 1085666807}
   - component: {fileID: 1085666806}
+  - component: {fileID: 1085666808}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -855,6 +869,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1085666808
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085666804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: -785.5325, y: 13.824097, z: -541.9862}
 --- !u!1 &1167951641
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,16 +936,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ea97055c756484fa557a9690eb7616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shake: {fileID: 88839645}
   fallSpeed: 5
   maxFallSpeedReg: 20
   groundCheck: {fileID: 1916824571}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  wallCheck: {fileID: 0}
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
   minJumpStrength: 5
   extraJumpStrength: 10
   jumpHoldLength: 0.5
@@ -19542,7 +19570,7 @@ Transform:
   m_GameObject: {fileID: 1717828910216243424}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 0.029, y: -0.64, z: 0}
+  m_LocalPosition: {x: -0.21, y: -1.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
