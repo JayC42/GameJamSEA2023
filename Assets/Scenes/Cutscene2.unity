@@ -698,7 +698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTime: 8
-  sceneName: 
+  sceneName: New GJ Scene1
 --- !u!4 &1198967121
 Transform:
   m_ObjectHideFlags: 0
