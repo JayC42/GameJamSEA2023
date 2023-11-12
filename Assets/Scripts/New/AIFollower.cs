@@ -10,16 +10,22 @@ public class AIFollower : MonoBehaviour
     private Transform playerTransform;
     Rigidbody2D rb;
     Animator anim;
-    Transform target; 
+    Transform target;
+
+    public static bool introComplete; 
     void Start()
     {
+        introComplete = false; 
         //anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
     }
     void Update()
     {
-        TargetFollow(); 
+        if (introComplete)
+        {
+            TargetFollow(); 
+        }
     }
     void TargetFollow()
     {
