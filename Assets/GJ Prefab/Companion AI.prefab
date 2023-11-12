@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 7550987791023095737}
   - component: {fileID: 5856732469070315845}
   - component: {fileID: 4640000831562556526}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Companion AI
   m_TagString: NPC
   m_Icon: {fileID: 0}

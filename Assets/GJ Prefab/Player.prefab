@@ -10027,7 +10027,7 @@ GameObject:
   - component: {fileID: 3052276537466307494}
   - component: {fileID: 8365421698023804033}
   - component: {fileID: 1677622591456841959}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -10256,6 +10256,10 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  wallCheck: {fileID: 0}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
   minJumpStrength: 5
   extraJumpStrength: 10
   jumpHoldLength: 0.5
