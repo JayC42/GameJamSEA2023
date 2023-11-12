@@ -7431,7 +7431,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -7464,6 +7464,7 @@ MonoBehaviour:
   - {fileID: 1579525847}
   - {fileID: 2101132268}
   - {fileID: 900129465}
+  objectOnPlate: 0
 --- !u!60 &560113046
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -7471,7 +7472,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 560113041}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -7493,7 +7494,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -12758,6 +12759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 1131439133}
   doorisOpened: 0
+  maxObjectOnPlate: 2
 --- !u!4 &938639343
 Transform:
   m_ObjectHideFlags: 0
@@ -33683,7 +33685,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681766090}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -33705,7 +33707,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -33743,6 +33745,7 @@ MonoBehaviour:
   - {fileID: 1579525847}
   - {fileID: 2101132268}
   - {fileID: 900129465}
+  objectOnPlate: 0
 --- !u!61 &1681766093
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -33772,7 +33775,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -33849,7 +33852,7 @@ Transform:
   m_GameObject: {fileID: 1681766090}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.7699995, y: -1.3798, z: 0}
+  m_LocalPosition: {x: -14.7699995, y: -0.797, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

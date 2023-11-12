@@ -4,12 +4,13 @@ using UnityEngine;
 public class PressureSwitch : MonoBehaviour
 {
     public PressureSwitchController psc; 
-    public GameObject[] requiredObjects; // Array of objects required to be on the pressure plate
-    public bool allPlatesActive => objectsOnPlate == requiredObjects.Length;
-    private int objectsOnPlate;
+    public GameObject[] requiredObjects; // Array of objects that is p to be on the pressure plate
+    [SerializeField] private int objectOnPlate;
+    public int ObjectOnPlate => objectOnPlate;
+    public bool plateIsActive => objectOnPlate == 1;
     private void Update()
     {
-        if (allPlatesActive)
+        if (plateIsActive)
         {
             psc.doorisOpened = true;
         }
@@ -19,12 +20,12 @@ public class PressureSwitch : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the entering object is one of the required objects
         if (ArrayContains(requiredObjects, other.gameObject))
         {
-            objectsOnPlate++;
+            objectOnPlate++;
             GetComponent<SpriteRenderer>().color = Color.green;
         }
     }
@@ -34,8 +35,8 @@ public class PressureSwitch : MonoBehaviour
         // Check if the exiting object is one of the required objects
         if (ArrayContains(requiredObjects, other.gameObject))
         {
-            objectsOnPlate--;
-            GetComponent<SpriteRenderer>().color = Color.white; psc.doorisOpened = allPlatesActive;
+            objectOnPlate--;
+            GetComponent<SpriteRenderer>().color = Color.white; 
         }
     }
 
