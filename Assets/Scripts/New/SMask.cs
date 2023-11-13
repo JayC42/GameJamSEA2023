@@ -20,7 +20,7 @@ public class SMask : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("NPC").GetComponent<Transform>();
+        //target = GameObject.FindGameObjectWithTag("NPC").GetComponent<Transform>();
     }
 
     void Update()
@@ -34,7 +34,7 @@ public class SMask : MonoBehaviour
         }
 
         float step = moveSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, target.position, 20 * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, target.position, 20 * Time.deltaTime);
 
         timer += Time.deltaTime;
     }
