@@ -7161,7 +7161,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1123376296684931859, guid: abf48b13334215d47b38cfb0f28272b4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.31
+      value: -3.16
       objectReference: {fileID: 0}
     - target: {fileID: 1123376296684931859, guid: abf48b13334215d47b38cfb0f28272b4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -39013,6 +39013,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abdff1136db0c134d903730f385f10db, type: 3}
+--- !u!1001 &6087750248873198227
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 658494357652505037, guid: 828db3f48fdd3084aa702273f94305a6, type: 3}
+      propertyPath: m_Name
+      value: Water Shrine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654780196995795717, guid: 828db3f48fdd3084aa702273f94305a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654780196995795717, guid: 828db3f48fdd3084aa702273f94305a6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654780196995795717, guid: 828db3f48fdd3084aa702273f94305a6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654780196995795717, guid: 828db3f48fdd3084aa702273f94305a6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654780196995795717, guid: 828db3f48fdd3084aa702273f94305a6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654780196995795717, guid: 828db3f48fdd3084aa702273f94305a6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654780196995795717, guid: 828db3f48fdd3084aa702273f94305a6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654780196995795717, guid: 828db3f48fdd3084aa702273f94305a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654780196995795717, guid: 828db3f48fdd3084aa702273f94305a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654780196995795717, guid: 828db3f48fdd3084aa702273f94305a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 828db3f48fdd3084aa702273f94305a6, type: 3}
 --- !u!1001 &6902700773170103973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39155,9 +39212,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Burning Fire '
       objectReference: {fileID: 0}
+    - target: {fileID: 3199018728650462943, guid: e695e5bbf520e2948929cc0f80f081f5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3402757060151638236, guid: e695e5bbf520e2948929cc0f80f081f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.39
+      value: -0.82
       objectReference: {fileID: 0}
     - target: {fileID: 3402757060151638236, guid: e695e5bbf520e2948929cc0f80f081f5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -39274,3 +39335,4 @@ SceneRoots:
   - {fileID: 374374624}
   - {fileID: 9088275727711013694}
   - {fileID: 8272935237347145608}
+  - {fileID: 6087750248873198227}

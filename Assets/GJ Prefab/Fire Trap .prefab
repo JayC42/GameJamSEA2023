@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6241395647190084220}
   - component: {fileID: 8194049894703288864}
   - component: {fileID: 2601851444580274223}
+  - component: {fileID: 8277867166603088530}
   m_Layer: 0
   m_Name: 'Fire Trap '
   m_TagString: Untagged
@@ -146,6 +147,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activationInterval: 5
   cooldownInterval: 5
+--- !u!114 &8277867166603088530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4553444174424137167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf6c55723eeafc49be447a7d17a1dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageRate: 19.6
 --- !u!1 &4725038439667168173
 GameObject:
   m_ObjectHideFlags: 0
