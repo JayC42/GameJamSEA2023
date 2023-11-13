@@ -26,7 +26,6 @@ public class PressureSwitch : MonoBehaviour
         if (ArrayContains(requiredObjects, other.gameObject))
         {
             objectOnPlate++;
-            GetComponent<SpriteRenderer>().color = Color.green;
         }
     }
 
@@ -36,7 +35,6 @@ public class PressureSwitch : MonoBehaviour
         if (ArrayContains(requiredObjects, other.gameObject))
         {
             objectOnPlate--;
-            GetComponent<SpriteRenderer>().color = Color.white; 
         }
     }
 
