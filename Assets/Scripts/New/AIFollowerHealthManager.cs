@@ -102,4 +102,8 @@ public class AIFollowerHealthManager : MonoBehaviour
             GameManager.Instance.GameOver();
         }
     }
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+    }
 }

@@ -297,13 +297,19 @@ MonoBehaviour:
   dialogueText: {fileID: 0}
   dialogueSets:
   - dialogueLines:
-    - 'Hi there! I am light '
-    - I shall be your  guiding light from noe
-    - let's get along little one!
+    - "This place has already been corroded by the spark\u2026"
+    - We must find the location of the spark to control its erosion.
+    - 'I can sense the general direction of the ember. '
+    - "There\u2019s no time to lose, let\u2019s set out quickly."
   - dialogueLines:
-    - Looks like the only way is down
+    - Jumping from here will take us inside the train.
     - 'You just have to jump '
     - 'Trust me and take a leap '
+  - dialogueLines:
+    - The surrounding is very dark...
+    - I can cast light within a limited radius, but it comes at the cost of my energy.
+    - 'When my becomes dimmer, that''s a sign that my energy is draining '
+    - "To replenish it, I\u2019ll need to absorb energy from the fire basin."
   tutorialActive: 0
   firstInteractionRequired: 0
   secondInteractionRequired: 0
@@ -681,7 +687,7 @@ GameObject:
   - component: {fileID: 9215066400404546681}
   - component: {fileID: 4640000831562556526}
   - component: {fileID: 5455227252196875779}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Companion AI
   m_TagString: NPC
   m_Icon: {fileID: 0}

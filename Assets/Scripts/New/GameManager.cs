@@ -73,9 +73,19 @@ public class GameManager : MonoBehaviour
         yield return SceneManager.LoadSceneAsync(currentLevel, 0);
         UpdateReferences();
 
-        if (Player != null && this.CheckpointPosition != Vector3.zero)
+        //if (Player != null && this.CheckpointPosition != Vector3.zero)
+        //{
+        //    Player.transform.position = CheckpointPosition;
+        //}
+
+        // Reset player's health to its maximum value
+        if (Player != null)
         {
-            Player.transform.position = CheckpointPosition;
+            Player.ResetHealth();
+        }
+        if (AiCompanion != null)
+        {
+            AiCompanion.ResetHealth();
         }
 
         yield break;

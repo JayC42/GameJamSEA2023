@@ -312,7 +312,10 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+    }
     // Call this method when the player reaches a checkpoint
     private void ReachCheckpoint()
     {

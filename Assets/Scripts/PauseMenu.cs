@@ -11,6 +11,11 @@ public class PauseMenu : MonoBehaviour
 
     void Awake()
     {
+        if (audioManager == null)
+        {
+            Debug.LogError("Audio manager not found in the scene!");
+            return;
+        }
         audioManager = FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
     }
 
