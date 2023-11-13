@@ -18,10 +18,12 @@ public class NPC : MonoBehaviour
     public List<DialogueSet> dialogueSets = new List<DialogueSet> { }; // List of dialogue arrays
     private int index;
     public bool tutorialActive;
+    public bool firstInteractionRequired;
+    public bool secondInteractionRequired;
 
     public float wordSpeed;
     public bool playerIsClose;
-
+    public Collider2D firstColliderToDisable; 
     PlayerController pc;
     TutorialText tt;
 
@@ -56,6 +58,8 @@ public class NPC : MonoBehaviour
                 {
                     tt.tutorial.SetActive(false);
                     tutorialActive = false;
+                    // disable first collider
+                    firstColliderToDisable.enabled = false;
                 }
             }
         }
