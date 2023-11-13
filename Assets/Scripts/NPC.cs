@@ -29,6 +29,9 @@ public class NPC : MonoBehaviour
 
     private void Start()
     {
+        // Make the NPC persist across scenes
+        DontDestroyOnLoad(gameObject);
+
         tt = GetComponentInChildren<TutorialText>();
         pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         pc.SceneNumber = 1;

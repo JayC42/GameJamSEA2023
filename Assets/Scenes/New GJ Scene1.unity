@@ -2974,6 +2974,64 @@ PrefabInstance:
       propertyPath: firstColliderToDisable
       value: 
       objectReference: {fileID: 1117439794}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.data[1].dialogueLines.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.data[2].dialogueLines.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.data[1].dialogueLines.Array.data[0]
+      value: Jumping from here will take us inside the train.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.data[1].dialogueLines.Array.data[1]
+      value: Beware down below the surrounding will be dark.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.data[1].dialogueLines.Array.data[2]
+      value: I can cast light within a limited radius, but it comes at the cost of
+        my energy.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.data[1].dialogueLines.Array.data[3]
+      value: 'When my becomes dimmer, that''s a sign that my energy is draining '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.data[1].dialogueLines.Array.data[4]
+      value: "To replenish it, I\u2019ll need to absorb energy from the fire basin."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.data[1].dialogueLines.Array.data[5]
+      value: Good luck! I'm with you
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.data[2].dialogueLines.Array.data[0]
+      value: Jumping from here will take us inside the train.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.data[2].dialogueLines.Array.data[1]
+      value: "To replenish it, I\u2019ll need to absorb energy from the fire basin."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.data[2].dialogueLines.Array.data[2]
+      value: I can cast light within a limited radius, but it comes at the cost of
+        my energy.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.data[2].dialogueLines.Array.data[3]
+      value: 'When my becomes dimmer, that''s a sign that my energy is draining '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544714933378775681, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
+      propertyPath: dialogueSets.Array.data[2].dialogueLines.Array.data[4]
+      value: "To replenish it, I\u2019ll need to absorb energy from the fire basin."
+      objectReference: {fileID: 0}
     - target: {fileID: 7550987791023095737, guid: de0af6b43b2e70a45b5d61150dd843a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.36
