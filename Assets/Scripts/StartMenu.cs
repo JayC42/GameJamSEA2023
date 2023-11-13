@@ -20,7 +20,8 @@ public class StartMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quit!");
+        animator.SetTrigger("Press");
+        StartCoroutine(QuitButtonAnimation());
     }
 
     IEnumerator StartButtonAnimation()
