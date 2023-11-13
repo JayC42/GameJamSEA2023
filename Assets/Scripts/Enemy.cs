@@ -34,7 +34,6 @@ public abstract class Enemy : MonoBehaviour
     {
         animator.SetTrigger("Hit");
         health -= damage;
-        audioManager.EnemyHurt();
 
         if (health > 0)
         {

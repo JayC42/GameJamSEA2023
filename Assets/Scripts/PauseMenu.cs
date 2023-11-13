@@ -55,7 +55,6 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
-        audioManager.Destroy();
         Time.timeScale = 1;
         GameIsPaused = false;
         SceneManager.LoadScene("Start Scene");

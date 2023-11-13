@@ -16,7 +16,6 @@ public class Apple : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            audioManager.PickItem();
             inventory.gameObject.GetComponent<Inventory>().PickFood();
             Destroy(gameObject);
         }

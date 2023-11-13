@@ -22,8 +22,4 @@ public class Bottle : MonoBehaviour
         }
     }
 
-    public void ItemBreakSFX()
-    {
-        audioManager.ItemBreak();
-    }
 }
