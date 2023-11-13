@@ -302,16 +302,38 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeDamage(float amount)
     {
-        if (currentHealth > 1)
+        if (currentHealth <= 0)
+        {
+            GameManager.Instance.GameOver();
+        }
+        else 
         {
             currentHealth -= amount;
         }
-        else
-        {
-            // Handle Death 
-            Destroy(gameObject);
-        }
+
     }
+
+    // Call this method when the player reaches a checkpoint
+    private void ReachCheckpoint()
+    {
+        // Get the player's current position
+        Vector3 currentPosition = transform.position;
+
+        // Update the checkpoint in the GameManager
+        GameManager.Instance.UpdateCheckpoint(currentPosition);
+
+        Debug.Log("Checkpoint reached!");
+    }
+
+    // Call this method when the player reaches the end of a level
+    private void ReachEndOfLevel(string nextLevelName)
+    {
+        // Check the win condition using the GameManager
+        GameManager.Instance.CheckWinCondition(nextLevelName);
+
+        Debug.Log("End of level reached!");
+    }
+
     public void ApplyImmunity(float duration)
     {
         isImmune = true;

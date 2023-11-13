@@ -305,8 +305,11 @@ MonoBehaviour:
     - 'You just have to jump '
     - 'Trust me and take a leap '
   tutorialActive: 0
+  firstInteractionRequired: 0
+  secondInteractionRequired: 0
   wordSpeed: 0.06
   playerIsClose: 1
+  firstColliderToDisable: {fileID: 0}
 --- !u!1 &5343711624657936071
 GameObject:
   m_ObjectHideFlags: 0

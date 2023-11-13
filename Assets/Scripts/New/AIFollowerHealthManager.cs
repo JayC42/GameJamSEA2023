@@ -97,10 +97,9 @@ public class AIFollowerHealthManager : MonoBehaviour
             //lightRange.flickTime = Mathf.Clamp(lightRange.flickTime, 0.05f, 0.5f);
 
         }
-        else
+        else if (currentHealth <= 0)
         {
-            // Player is out of health, you can handle this as needed (e.g., player death)
-            //GameManager.Instance.GameOver(); 
+            GameManager.Instance.GameOver();
         }
     }
 }

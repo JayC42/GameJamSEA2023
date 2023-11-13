@@ -7,92 +7,158 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Tilemap DarkMap;
-    public Tilemap BlurredMap;
-    public Tilemap BackgroundMap;
-    public Tile DarkTile;
-    public Tile BlurredTile; 
-    //public Image fadeImage;
+    [Header("General functions")]
+    public static GameManager Instance; // Singleton instance
 
-    //public float fadeTime = 1f;
+    public GameObject player;
+    public GameObject gameOverUI;
+    public GameObject levelCompleteUI;
+    public GameObject mainMenuUI;
+    public GameObject loadingScreen;
+    private bool isLevelLoading = false;
+    private bool isGamePaused = false; 
+
+    private bool isPlayerAlive = true;
 
     private Vector3 CheckpointPosition;
 
     public static GameManager Inst;
 
-    //public PlayerController Player;
+    public PlayerController Player;
+    public AIFollowerHealthManager AiCompanion;
 
     private string currentLevel;
 
+
+    private void Awake()
+    {
+        // Ensure there is only one instance of GameManager
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            UpdateReferences();
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
-        DarkMap.origin = BlurredMap.origin = BackgroundMap.origin;
-        DarkMap.size = BlurredMap.size = BackgroundMap.size; 
-
-        foreach (Vector3Int p in DarkMap.cellBounds.allPositionsWithin)
-        {
-            DarkMap.SetTile(p, DarkTile);
-        }
-        foreach (Vector3Int p in BlurredMap.cellBounds.allPositionsWithin)
-        {
-            BlurredMap.SetTile(p, DarkTile);
-        }
-
-
+      
+        #region Starting
+        //ShowMainMenu();
+        //this.currentLevel = SceneManager.GetActiveScene().name;
+        #endregion
     }
-    //private void Awake()
-    //{
-    //    if (GameManager.Inst != null && GameManager.Inst != this)
-    //    {
-    //        Object.Destroy(base.gameObject);
-    //        return;
-    //    }
-    //    base.transform.parent = null;
-    //    this.currentLevel = SceneManager.GetActiveScene().name;
-    //    GameManager.Inst = this;
-    //    Object.DontDestroyOnLoad(base.gameObject);
-    //    this.UpdateReferences();
-    //}
 
-    //public void UpdateCheckpoint(Vector3 position)
-    //{
-    //    this.CheckpointPosition = position;
-    //}
-    //public void ResetLevel()
-    //{
-    //    base.StartCoroutine(this.ResetLevelRoutine());
-    //}
-    //public void LoadLevel(string levelName)
-    //{
-    //    base.StartCoroutine(this.LoadLevelRoutine(levelName));
-    //}
-    //private IEnumerator ResetLevelRoutine()
-    //{
-    //    yield return new DOTweenCYInstruction.WaitForCompletion(DOTweenModuleUI.DOFade(this.fadeImage, 1f, this.fadeTime));
-    //    yield return SceneManager.LoadSceneAsync(this.currentLevel, 0);
-    //    this.UpdateReferences();
-    //    if (this.CheckpointPosition != Vector3.zero)
-    //    {
-    //        this.Player.transform.position = this.CheckpointPosition;
-    //        this.ProCamera2D.MoveCameraInstantlyToPosition(this.CheckpointPosition);
-    //    }
-    //    yield return new DOTweenCYInstruction.WaitForCompletion(DOTweenModuleUI.DOFade(this.fadeImage, 0f, this.fadeTime));
-    //    yield break;
-    //}
+    public void UpdateCheckpoint(Vector3 position)
+    {
+        this.CheckpointPosition = position;
+    }
+    public void ResetLevel()
+    {
+        base.StartCoroutine(this.ResetLevelRoutine());
+    }
+    public void LoadLevel(string levelName)
+    {
+        if (!isLevelLoading)
+        {
+            StartCoroutine(LoadLevelRoutine(levelName));
+        }
+    }
+    private IEnumerator ResetLevelRoutine()
+    {
+        yield return SceneManager.LoadSceneAsync(currentLevel, 0);
+        UpdateReferences();
 
-    //private IEnumerator LoadLevelRoutine(string levelName)
-    //{
-    //    yield return new DOTweenCYInstruction.WaitForCompletion(DOTweenModuleUI.DOFade(this.fadeImage, 1f, this.fadeTime));
-    //    yield return SceneManager.LoadSceneAsync(levelName, 0);
-    //    this.UpdateReferences();
-    //    this.CheckpointPosition = Vector3.zero;
-    //    this.currentLevel = levelName;
-    //    yield return new DOTweenCYInstruction.WaitForCompletion(DOTweenModuleUI.DOFade(this.fadeImage, 0f, this.fadeTime));
-    //    yield break;
-    //}
-    //private void UpdateReferences()
-    //{
-    //    this.ProCamera2D = Object.FindObjectOfType<ProCamera2D>();
-    //    this.Player = Object.FindObjectOfType<PlayerController>();
-    //}
+        if (Player != null && this.CheckpointPosition != Vector3.zero)
+        {
+            Player.transform.position = CheckpointPosition;
+        }
+
+        yield break;
+    }
+    private IEnumerator LoadLevelRoutine(string levelName)
+    {
+        isLevelLoading = true;
+        loadingScreen.SetActive(true); // Show loading screen
+
+        yield return SceneManager.LoadSceneAsync(levelName, 0);
+
+        loadingScreen.SetActive(false); // Hide loading screen
+        UpdateReferences();
+        CheckpointPosition = Vector3.zero;
+        currentLevel = levelName;
+        isLevelLoading = false;
+
+        yield break;
+    }
+    private void UpdateReferences()
+    {
+        Player = FindObjectOfType<PlayerController>();
+        AiCompanion = FindObjectOfType<AIFollowerHealthManager>();
+        
+        if (Player == null)
+        {
+            Debug.LogError("PlayerController not found in the scene!");
+        }
+        if (AiCompanion == null)
+        {
+            Debug.LogError("AI companion not found in the scene!");
+        }
+    }
+
+    public void GameOver()
+    {
+        if (!isGamePaused)
+        {
+            PauseGame(); // Pause the game when the player dies
+        }
+
+        // Handle logic when the player dies
+        StartCoroutine(GameOverRoutine());
+    }
+
+    private IEnumerator GameOverRoutine()
+    {
+        // Show game over UI or any other relevant UI
+        gameOverUI.SetActive(true);
+
+        // Delay for a moment before reloading from the last checkpoint
+        yield return new WaitForSeconds(2f);
+
+        // Reload the level from the last checkpoint
+        ResetLevel();
+
+        // Unpause the game
+        UnpauseGame();
+    }
+    private void PauseGame()
+    {
+        Time.timeScale = 0f; // Set the time scale to 0 to pause the game
+        isGamePaused = true;
+    }
+
+    private void UnpauseGame()
+    {
+        Time.timeScale = 1f; // Set the time scale back to 1 to unpause the game
+        isGamePaused = false;
+    }
+
+    public void CheckWinCondition(string nextLevelName)
+    {
+        // check if the next level name is the final level
+        if (nextLevelName == "FinalLevel")
+        {
+            // Handle winning condition, show level complete UI or any other relevant UI
+            levelCompleteUI.SetActive(true);
+        }
+        else
+        {
+            // Load the next level
+            LoadLevel(nextLevelName);
+        }
+    }
 }
