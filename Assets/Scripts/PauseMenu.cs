@@ -25,19 +25,18 @@ public class PauseMenu : MonoBehaviour
         //    }
         //}
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    if (GameIsPaused)
+        //    {
+        //        Resume();
+        //    }
+        //    else
+        //    {
+        //        Pause();
+        //    }
+        //}
     }
-
 
     public void Resume()
     {
@@ -46,23 +45,25 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
     }
 
-    void Pause()
+    public void PauseGame()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0;
         GameIsPaused = true;
     }
 
+    public void RestartLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        Time.timeScale = 1;
+        GameIsPaused = false;
+        SceneManager.LoadScene(currentSceneIndex);
+    }
+
     public void LoadMenu()
     {
         Time.timeScale = 1;
         GameIsPaused = false;
-        SceneManager.LoadScene("Start Scene");
-    }
-
-    public void QuitGame()
-    {
-        Debug.Log("Qutting game....");
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 }
