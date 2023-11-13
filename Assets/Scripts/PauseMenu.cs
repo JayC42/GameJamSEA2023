@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
 
+<<<<<<< Updated upstream
     AudioManager audioManager;
 
     void Awake()
@@ -19,6 +20,8 @@ public class PauseMenu : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
     }
 
+=======
+>>>>>>> Stashed changes
     public GameObject pauseMenuUI;
     void Update()
     {
