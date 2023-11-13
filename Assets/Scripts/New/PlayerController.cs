@@ -168,23 +168,29 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && IsGrounded())
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-            //animator.SetTrigger("Jump");
-            if (jumpingPower < 6f)
+            if (!PauseMenu.GameIsPaused)
             {
-                squashAndStretch.SquashStretch(0.9f, 1.3f, 0.3f);
-                this.jumpParticles.Play();
-            }
-            else
-            {
-                squashAndStretch.SquashStretch(0.9f, 1.4f, 1f);
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+                //animator.SetTrigger("Jump");
+                if (jumpingPower < 6f)
+                {
+                    squashAndStretch.SquashStretch(0.9f, 1.3f, 0.3f);
+                    this.jumpParticles.Play();
+                }
+                else
+                {
+                    squashAndStretch.SquashStretch(0.9f, 1.4f, 1f);
+                }
             }
         }
 
         if (context.canceled && rb.velocity.y > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-            //animator.SetTrigger("Jump");
+            if (!PauseMenu.GameIsPaused)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+                //animator.SetTrigger("Jump");
+            }
         }
     }
     private void FixedUpdate()
@@ -200,7 +206,10 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && canDash)
         {
-            StartCoroutine(Dash(dashDistance));
+            if (!PauseMenu.GameIsPaused)
+            {
+                StartCoroutine(Dash(dashDistance));
+            }
         }
     }
     private bool IsGrounded()
@@ -218,8 +227,11 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        horizontal = context.ReadValue<Vector2>().x;
-        this.moveParticles.Play();
+        if (!PauseMenu.GameIsPaused)
+        {
+            horizontal = context.ReadValue<Vector2>().x;
+            this.moveParticles.Play();
+        }
     }
 
     private bool IsWalled()
