@@ -6,22 +6,6 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
-
-<<<<<<< Updated upstream
-    AudioManager audioManager;
-
-    void Awake()
-    {
-        if (audioManager == null)
-        {
-            Debug.LogError("Audio manager not found in the scene!");
-            return;
-        }
-        audioManager = FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
-    }
-
-=======
->>>>>>> Stashed changes
     public GameObject pauseMenuUI;
     void Update()
     {

@@ -10,11 +10,10 @@ public class GameManager : MonoBehaviour
     [Header("General functions")]
     public static GameManager Instance; // Singleton instance
 
-    public GameObject player;
-    public GameObject gameOverUI;
-    public GameObject levelCompleteUI;
-    public GameObject mainMenuUI;
-    public GameObject loadingScreen;
+    //public GameObject gameOverUI;
+    //public GameObject levelCompleteUI;
+    //public GameObject mainMenuUI;
+    //public GameObject loadingScreen;
     private bool isLevelLoading = false;
     private bool isGamePaused = false; 
 
@@ -93,11 +92,11 @@ public class GameManager : MonoBehaviour
     private IEnumerator LoadLevelRoutine(string levelName)
     {
         isLevelLoading = true;
-        loadingScreen.SetActive(true); // Show loading screen
+        //loadingScreen.SetActive(true); // Show loading screen
 
         yield return SceneManager.LoadSceneAsync(levelName, 0);
 
-        loadingScreen.SetActive(false); // Hide loading screen
+        //loadingScreen.SetActive(false); // Hide loading screen
         UpdateReferences();
         CheckpointPosition = Vector3.zero;
         currentLevel = levelName;
@@ -134,7 +133,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator GameOverRoutine()
     {
         // Show game over UI or any other relevant UI
-        gameOverUI.SetActive(true);
+        //gameOverUI.SetActive(true);
 
         // Delay for a moment before reloading from the last checkpoint
         yield return new WaitForSeconds(2f);
@@ -163,7 +162,7 @@ public class GameManager : MonoBehaviour
         if (nextLevelName == "FinalLevel")
         {
             // Handle winning condition, show level complete UI or any other relevant UI
-            levelCompleteUI.SetActive(true);
+            //levelCompleteUI.SetActive(true);
         }
         else
         {
