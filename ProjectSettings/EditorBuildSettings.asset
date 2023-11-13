@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/New GJ Scene 2.unity
     guid: bec32673c480e344194a34d606e51368
+  - enabled: 1
+    path: Assets/Scenes/New GJ Scene 3.unity
+    guid: 51ba4775efa48ff45aadf77ebb09f346
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 16a1dc221027c264e826c34fbbdac07b, type: 2}
