@@ -5,15 +5,33 @@ using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     public void StartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        animator.SetTrigger("Press");
+        StartCoroutine(StartButtonAnimation());
     }
 
     public void QuitGame()
     {
         Debug.Log("Quit!");
+    }
+
+    IEnumerator StartButtonAnimation()
+    {
+        yield return new WaitForSeconds(1.4f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    IEnumerator QuitButtonAnimation()
+    {
+        yield return new WaitForSeconds(1.4f);
         Application.Quit();
     }
 }
