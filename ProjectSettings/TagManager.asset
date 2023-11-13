@@ -10,6 +10,7 @@ TagManager:
   - Boss
   - NPC
   - PressureSwtich
+  - RegenZone
   layers:
   - Default
   - TransparentFX

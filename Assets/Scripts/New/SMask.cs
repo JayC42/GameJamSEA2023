@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SMask : MonoBehaviour
 {
-    [Range(0.05f, 0.5f)]
+    [Range(0.05f, 2.5f)]
     public float flickTime;
 
     [Range(0.02f, 0.09f)]
@@ -20,7 +20,7 @@ public class SMask : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        target = GameObject.FindGameObjectWithTag("NPC").GetComponent<Transform>();
     }
 
     void Update()
