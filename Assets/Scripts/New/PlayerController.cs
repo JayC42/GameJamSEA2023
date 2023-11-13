@@ -12,7 +12,11 @@ public class PlayerController : MonoBehaviour
     private float yVelocity;
 
     private Vector2 moveInput;
-    private int sceneNumber; 
+    private int sceneNumber;
+
+    [Header("Health")]
+    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float currentHealth;
 
     [Header("Raycasts")]
     [SerializeField] private Transform groundCheck;
@@ -87,6 +91,11 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem moveParticles;
     [SerializeField]
     private ParticleSystem dashParticles;
+
+    // Buff Timers
+    private bool isImmune = false;
+    private float immunityTimer = 0f;
+
     public int SceneNumber { get => sceneNumber; set => sceneNumber = value; }
 
     void Start()
@@ -94,13 +103,28 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //animator = GetComponent<Animator>();
         squashAndStretch = GetComponent<SquashAndStretch>();
+
+        maxHealth = Mathf.Min(maxHealth, 100f);
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
         //BaseAnimations();
+        #region Buff
+        // Check if immunity has expired
+        if (isImmune)
+        {
+            immunityTimer -= Time.deltaTime;
 
+            if (immunityTimer <= 0)
+            {
+                EndImmunity();
+            }
+        }
+        #endregion 
+        #region Movement
         if (!wasGrounded && IsGrounded())
         {
             this.landParticles.Play();
@@ -131,6 +155,8 @@ public class PlayerController : MonoBehaviour
         }
 
         WallJump();
+
+        #endregion
     }
     private void BaseAnimations()
     {
@@ -274,4 +300,43 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true; 
     }
+    public void TakeDamage(float amount)
+    {
+        if (currentHealth > 1)
+        {
+            currentHealth -= amount;
+        }
+        else
+        {
+            // Handle Death 
+            Destroy(gameObject);
+        }
+    }
+    public void ApplyImmunity(float duration)
+    {
+        isImmune = true;
+        immunityTimer = duration;
+
+        // You might want to play a particle effect or apply any visual feedback here
+        // For example: PlayParticleEffect();
+
+        Debug.Log("Player is immune to fire for " + duration + " seconds.");
+    }
+
+    private void EndImmunity()
+    {
+        isImmune = false;
+
+        // You might want to stop any visual effects or animations associated with immunity here
+        // For example: StopParticleEffect();
+
+        Debug.Log("Player's immunity has worn off.");
+    }
+
+    public bool IsImmune
+    {
+        get { return isImmune; }
+    }
+
+    
 }

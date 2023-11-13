@@ -34531,9 +34531,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1123376296684931859}
   - component: {fileID: 6839275258269275182}
+  - component: {fileID: 7021678229586431332}
   - component: {fileID: 3865370461244583680}
   - component: {fileID: 7086819700980116473}
-  - component: {fileID: 7021678229586431332}
   - component: {fileID: 1180141146117042888}
   m_Layer: 11
   m_Name: Player 1
@@ -34687,6 +34687,48 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7021678229586431332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8426868569367927915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ea97055c756484fa557a9690eb7616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shake: {fileID: 0}
+  maxHealth: 100
+  currentHealth: 0
+  groundCheck: {fileID: 4941630830188576742}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  wallCheck: {fileID: 6779515580075328683}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  minJumpStrength: 5
+  extraJumpStrength: 10
+  jumpHoldLength: 0.5
+  jumpBufferTime: 0.3
+  jumpingPower: 12
+  isWallSliding: 0
+  wallSlidingSpeed: 2
+  wallJumpingTime: 0.2
+  wallJumpingDuration: 0.4
+  wallJumpingPower: {x: 8, y: 8}
+  dashDistance: 5
+  dashingPower: 50
+  dashingTime: 0.5
+  dashingCooldown: 1.5
+  coyoteTime: 0.3
+  jumpParticles: {fileID: 5085678836359162324}
+  landParticles: {fileID: 6907881636616863220}
+  moveParticles: {fileID: 7765669163285884995}
+  dashParticles: {fileID: 385536642201480956}
 --- !u!50 &3865370461244583680
 Rigidbody2D:
   serializedVersion: 4
@@ -34749,46 +34791,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0014492869, y: 0.1383977}
   m_Size: {x: 0.5642184, y: 1.3611431}
   m_Direction: 0
---- !u!114 &7021678229586431332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8426868569367927915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1ea97055c756484fa557a9690eb7616, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shake: {fileID: 0}
-  groundCheck: {fileID: 4941630830188576742}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  wallCheck: {fileID: 6779515580075328683}
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  minJumpStrength: 5
-  extraJumpStrength: 10
-  jumpHoldLength: 0.5
-  jumpBufferTime: 0.3
-  jumpingPower: 12
-  isWallSliding: 0
-  wallSlidingSpeed: 2
-  wallJumpingTime: 0.2
-  wallJumpingDuration: 0.4
-  wallJumpingPower: {x: 8, y: 8}
-  dashDistance: 5
-  dashingPower: 50
-  dashingTime: 0.5
-  dashingCooldown: 1.5
-  coyoteTime: 0.3
-  jumpParticles: {fileID: 5085678836359162324}
-  landParticles: {fileID: 6907881636616863220}
-  moveParticles: {fileID: 7765669163285884995}
-  dashParticles: {fileID: 385536642201480956}
 --- !u!114 &1180141146117042888
 MonoBehaviour:
   m_ObjectHideFlags: 0
