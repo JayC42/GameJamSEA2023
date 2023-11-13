@@ -2,23 +2,44 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Image fadeImage;
+    public Tilemap DarkMap;
+    public Tilemap BlurredMap;
+    public Tilemap BackgroundMap;
+    public Tile DarkTile;
+    public Tile BlurredTile; 
+    //public Image fadeImage;
 
-    public float fadeTime = 1f;
+    //public float fadeTime = 1f;
 
     private Vector3 CheckpointPosition;
 
     public static GameManager Inst;
 
-    public PlayerController Player;
-
+    //public PlayerController Player;
 
     private string currentLevel;
 
+    private void Start()
+    {
+        DarkMap.origin = BlurredMap.origin = BackgroundMap.origin;
+        DarkMap.size = BlurredMap.size = BackgroundMap.size; 
+
+        foreach (Vector3Int p in DarkMap.cellBounds.allPositionsWithin)
+        {
+            DarkMap.SetTile(p, DarkTile);
+        }
+        foreach (Vector3Int p in BlurredMap.cellBounds.allPositionsWithin)
+        {
+            BlurredMap.SetTile(p, DarkTile);
+        }
+
+
+    }
     //private void Awake()
     //{
     //    if (GameManager.Inst != null && GameManager.Inst != this)
