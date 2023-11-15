@@ -44,15 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7770f626e96d92409b919e9a616a781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  gameOverUI: {fileID: 0}
-  levelCompleteUI: {fileID: 0}
-  mainMenuUI: {fileID: 0}
-  loadingScreen: {fileID: 0}
-  DarkMap: {fileID: 0}
-  BlurredMap: {fileID: 0}
-  BackgroundMap: {fileID: 0}
-  DarkTile: {fileID: 11400000, guid: ff6fb5a061dea3d4e8cddb31d5bb226d, type: 2}
-  BlurredTile: {fileID: 11400000, guid: 1a1e9d74cdeae19448ffee0c76bce560, type: 2}
+  levelNames:
+  - GJ Menu
+  - Cutscene1
+  - Cutscene2
+  - New GJ Scene1
+  - New GJ Scene2
+  - New GJ Scene3
+  - New GJ Scene4
+  - Cutscene3
   Player: {fileID: 0}
   AiCompanion: {fileID: 0}

@@ -10,10 +10,9 @@ public class PlayerController : MonoBehaviour
     public CameraShake shake;
 
     private float yVelocity;
-
     private Vector2 moveInput;
     private int sceneNumber;
-
+    private bool isDialogActive; // New variable to track if dialogue is active
     [Header("Health")]
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float currentHealth;
@@ -102,8 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         //animator = GetComponent<Animator>();
-        squashAndStretch = GetComponent<SquashAndStretch>();
-
+        squashAndStretch = GetComponent<SquashAndStretch>(); 
         maxHealth = Mathf.Min(maxHealth, 100f);
         currentHealth = maxHealth;
     }
@@ -112,7 +110,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Check if the game is paused
-        if (PauseMenu.GameIsPaused)
+        if (PauseMenu.GameIsPaused || isDialogActive)
         {
             // Reset movement input when paused
             horizontal = 0f;
@@ -174,7 +172,7 @@ public class PlayerController : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         // Check if the player is currently dashing
-        if (isDashing) return;
+        if (isDashing || isDialogActive) return;
 
         if (context.performed && IsGrounded())
         {
@@ -215,7 +213,7 @@ public class PlayerController : MonoBehaviour
     public void Dash(InputAction.CallbackContext context)
     {
         // Check if the player is currently jumping
-        if (!IsGrounded()) return;
+        if (!IsGrounded() || isDialogActive) return;
 
         if (context.performed && canDash)
         {
@@ -251,7 +249,10 @@ public class PlayerController : MonoBehaviour
             horizontal = 0f;
         }
     }
-
+    public void SetDialogActive(bool active)
+    {
+        isDialogActive = active;
+    }
     private bool IsWalled()
     {
         return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);

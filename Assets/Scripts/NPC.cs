@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 [Serializable]
 public class DialogueSet
@@ -41,6 +42,7 @@ public class NPC : MonoBehaviour
 
     void Update()
     {
+        pc.SetDialogActive(dialogueStarted);
         if (Input.GetKeyDown(KeyCode.E) && playerIsClose && !dialogueStarted)
         { 
             if (dialoguePanel.activeInHierarchy)
