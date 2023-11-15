@@ -4548,6 +4548,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2981610095996093284, guid: 8d49146580a6164448397a2ec3ff7eae, type: 3}
+      propertyPath: levelNames.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981610095996093284, guid: 8d49146580a6164448397a2ec3ff7eae, type: 3}
+      propertyPath: levelNames.Array.data[0]
+      value: GJ Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981610095996093284, guid: 8d49146580a6164448397a2ec3ff7eae, type: 3}
+      propertyPath: levelNames.Array.data[1]
+      value: Cutscene1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981610095996093284, guid: 8d49146580a6164448397a2ec3ff7eae, type: 3}
+      propertyPath: levelNames.Array.data[2]
+      value: Cutscene2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981610095996093284, guid: 8d49146580a6164448397a2ec3ff7eae, type: 3}
+      propertyPath: levelNames.Array.data[3]
+      value: New GJ Scene1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981610095996093284, guid: 8d49146580a6164448397a2ec3ff7eae, type: 3}
+      propertyPath: levelNames.Array.data[4]
+      value: New GJ Scene2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981610095996093284, guid: 8d49146580a6164448397a2ec3ff7eae, type: 3}
+      propertyPath: levelNames.Array.data[5]
+      value: New GJ Scene3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981610095996093284, guid: 8d49146580a6164448397a2ec3ff7eae, type: 3}
+      propertyPath: levelNames.Array.data[6]
+      value: New GJ Scene4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981610095996093284, guid: 8d49146580a6164448397a2ec3ff7eae, type: 3}
+      propertyPath: levelNames.Array.data[7]
+      value: Cutscene3
+      objectReference: {fileID: 0}
     - target: {fileID: 3587488790830471002, guid: 8d49146580a6164448397a2ec3ff7eae, type: 3}
       propertyPath: m_Name
       value: GameManager

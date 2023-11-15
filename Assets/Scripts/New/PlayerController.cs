@@ -335,10 +335,13 @@ public class PlayerController : MonoBehaviour
         if (currentHealth <= 0)
         {
             // restart current level
+            GameManager.Instance.ResetLevel();
+            print("Level reset!");
         }
         else 
         {
             currentHealth -= amount;
+            print("taking dmg!");
         }
 
     }

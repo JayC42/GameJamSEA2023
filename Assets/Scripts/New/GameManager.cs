@@ -2,14 +2,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [Header("General functions")]
     public static GameManager Instance; // Singleton instance
-
+    public string[] levelNames; // Array of scene names
     //public GameObject gameOverUI;
     //public GameObject levelCompleteUI;
     //public GameObject mainMenuUI;
@@ -45,13 +44,16 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-      
         #region Starting
-        //ShowMainMenu();
+        ShowMainMenu();
         //this.currentLevel = SceneManager.GetActiveScene().name;
+        currentLevel = levelNames[0];
         #endregion
     }
+    public void ShowMainMenu()
+    {
 
+    }
     public void UpdateCheckpoint(Vector3 position)
     {
         this.CheckpointPosition = position;
@@ -67,8 +69,14 @@ public class GameManager : MonoBehaviour
             StartCoroutine(LoadLevelRoutine(levelName));
         }
     }
+    public void NextLevel()
+    {
+        StartCoroutine(NextLevelRoutine());
+    }
     private IEnumerator ResetLevelRoutine()
     {
+        //string currentSceneName = SceneManager.GetActiveScene().name;
+        //yield return SceneManager.LoadSceneAsync(currentSceneName, 0);
         yield return SceneManager.LoadSceneAsync(currentLevel, 0);
         UpdateReferences();
 
@@ -98,11 +106,36 @@ public class GameManager : MonoBehaviour
 
         //loadingScreen.SetActive(false); // Hide loading screen
         UpdateReferences();
-        CheckpointPosition = Vector3.zero;
+        //CheckpointPosition = Vector3.zero;
         currentLevel = levelName;
         isLevelLoading = false;
 
         yield break;
+    }
+
+    private IEnumerator NextLevelRoutine()
+    {
+        if (levelNames.Length == 0)
+        {
+            Debug.LogError("No level names specified in the inspector.");
+            yield break;
+        }
+
+        int currentLevelIndex = System.Array.IndexOf(levelNames, currentLevel);
+
+        if (currentLevelIndex != -1 && currentLevelIndex < levelNames.Length - 1)
+        {
+            int nextLevelIndex = currentLevelIndex + 1;
+            string nextLevelName = levelNames[nextLevelIndex];
+
+            yield return SceneManager.LoadSceneAsync(nextLevelName, 0);
+            UpdateReferences();
+            currentLevel = nextLevelName;
+        }
+        else
+        {
+            Debug.LogWarning("No next level found. Make sure the levels are correctly ordered in the inspector.");
+        }
     }
     private void UpdateReferences()
     {
