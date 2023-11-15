@@ -11,6 +11,7 @@ public class AIFollowerHealthManager : MonoBehaviour
     public ParticleSystem fullyHealedParticle;    // Particle system for health 100
 
     // Test
+    private NextLevel nextLevel;
     private Transform lightSource;
     private SMask lightRange;
     public float currentHealth;
@@ -22,7 +23,9 @@ public class AIFollowerHealthManager : MonoBehaviour
         maxHealth = Mathf.Min(maxHealth, 100f);
         currentHealth = maxHealth;
         lightSource = transform.Find("LightSource");
-        lightRange = lightSource.GetComponent<SMask>(); 
+        lightRange = lightSource.GetComponent<SMask>();
+        nextLevel = FindObjectOfType<NextLevel>();
+
     }
 
     private void Update()
@@ -99,7 +102,8 @@ public class AIFollowerHealthManager : MonoBehaviour
         }
         else if (currentHealth <= 0)
         {
-            GameManager.Instance.GameOver();
+            // restart current level
+            StartCoroutine(nextLevel.RestartCurrentLevel());
         }
     }
     public void ResetHealth()

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     SquashAndStretch squashAndStretch;
     public CameraShake shake;
 
+    private NextLevel nextLevel;
     private float yVelocity;
     private Vector2 moveInput;
     private int sceneNumber;
@@ -100,6 +101,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        nextLevel = FindObjectOfType<NextLevel>();
         //animator = GetComponent<Animator>();
         squashAndStretch = GetComponent<SquashAndStretch>(); 
         maxHealth = Mathf.Min(maxHealth, 100f);
@@ -336,7 +338,7 @@ public class PlayerController : MonoBehaviour
         if (currentHealth <= 0)
         {
             // restart current level
-            GameManager.Instance.ResetLevel();
+            StartCoroutine(nextLevel.RestartCurrentLevel());
             print("Level reset!");
         }
         else 

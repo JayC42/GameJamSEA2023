@@ -3347,6 +3347,10 @@ PrefabInstance:
       propertyPath: sceneName
       value: New GJ Scene 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4602350475025061682, guid: 5e6a84fc20a5a1946af43752d25a0195, type: 3}
+      propertyPath: nextSceneName
+      value: New GJ Scene 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6461098483969290225, guid: 5e6a84fc20a5a1946af43752d25a0195, type: 3}
       propertyPath: m_Name
       value: ReloadLevel
@@ -4712,7 +4716,7 @@ Transform:
   m_GameObject: {fileID: 1639988771}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.563181, y: -0.047682643, z: -10}
+  m_LocalPosition: {x: -5.632946, y: -0.046722293, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5453,6 +5457,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3383446004573416025, guid: 86b12ed4039502841bd51b0cb6008f0a, type: 3}
       propertyPath: sceneName
+      value: New GJ Scene 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383446004573416025, guid: 86b12ed4039502841bd51b0cb6008f0a, type: 3}
+      propertyPath: nextSceneName
       value: New GJ Scene 3
       objectReference: {fileID: 0}
     - target: {fileID: 4010878057265873260, guid: 86b12ed4039502841bd51b0cb6008f0a, type: 3}

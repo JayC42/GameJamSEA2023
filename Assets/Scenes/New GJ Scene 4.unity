@@ -5635,6 +5635,10 @@ PrefabInstance:
       propertyPath: sceneName
       value: Cutscene3
       objectReference: {fileID: 0}
+    - target: {fileID: 3383446004573416025, guid: 86b12ed4039502841bd51b0cb6008f0a, type: 3}
+      propertyPath: nextSceneName
+      value: Cutscene3
+      objectReference: {fileID: 0}
     - target: {fileID: 4010878057265873260, guid: 86b12ed4039502841bd51b0cb6008f0a, type: 3}
       propertyPath: m_LocalScale.x
       value: 7.504379
