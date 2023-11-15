@@ -111,6 +111,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Check if the game is paused
+        if (PauseMenu.GameIsPaused)
+        {
+            // Reset movement input when paused
+            horizontal = 0f;
+            return;
+        }
         //BaseAnimations();
         #region Buff
         // Check if immunity has expired
@@ -231,6 +238,11 @@ public class PlayerController : MonoBehaviour
         {
             horizontal = context.ReadValue<Vector2>().x;
             this.moveParticles.Play();
+        }
+        else
+        {
+            // Reset movement input when paused
+            horizontal = 0f;
         }
     }
 
