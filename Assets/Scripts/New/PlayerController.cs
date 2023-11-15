@@ -173,6 +173,9 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
+        // Check if the player is currently dashing
+        if (isDashing) return;
+
         if (context.performed && IsGrounded())
         {
             if (!PauseMenu.GameIsPaused)
@@ -211,6 +214,9 @@ public class PlayerController : MonoBehaviour
     }
     public void Dash(InputAction.CallbackContext context)
     {
+        // Check if the player is currently jumping
+        if (!IsGrounded()) return;
+
         if (context.performed && canDash)
         {
             if (!PauseMenu.GameIsPaused)
@@ -328,7 +334,7 @@ public class PlayerController : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            
+            // restart current level
         }
         else 
         {
