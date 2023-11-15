@@ -17,6 +17,7 @@ public class NPC : MonoBehaviour
     public TMP_Text dialogueText;
     public List<DialogueSet> dialogueSets = new List<DialogueSet> { }; // List of dialogue arrays
     private int index;
+    public bool dialogueStarted;
     public bool tutorialActive;
     public bool firstInteractionRequired;
     public bool secondInteractionRequired;
@@ -40,7 +41,7 @@ public class NPC : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && playerIsClose)
+        if (Input.GetKeyDown(KeyCode.E) && playerIsClose && !dialogueStarted)
         { 
             if (dialoguePanel.activeInHierarchy)
             {
@@ -50,6 +51,7 @@ public class NPC : MonoBehaviour
             }
             else
             {
+                dialogueStarted = true; 
                 dialoguePanel.SetActive(true);
                 StartCoroutine(Typing());
 
@@ -129,6 +131,7 @@ public class NPC : MonoBehaviour
         {
             zeroText();
             EnablePlayerController(true);
+            dialogueStarted = false; 
         }
     }
 

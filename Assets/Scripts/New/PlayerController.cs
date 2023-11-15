@@ -316,7 +316,7 @@ public class PlayerController : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            GameManager.Instance.GameOver();
+            
         }
         else 
         {
@@ -341,10 +341,10 @@ public class PlayerController : MonoBehaviour
     }
 
     // Call this method when the player reaches the end of a level
-    private void ReachEndOfLevel(string nextLevelName)
+    private void GoToNextLevel(string nextLevelName)
     {
         // Check the win condition using the GameManager
-        GameManager.Instance.CheckWinCondition(nextLevelName);
+        GameManager.Instance.NextLevel(nextLevelName);
 
         Debug.Log("End of level reached!");
     }

@@ -156,18 +156,8 @@ public class GameManager : MonoBehaviour
         isGamePaused = false;
     }
 
-    public void CheckWinCondition(string nextLevelName)
+    public void NextLevel(string nextLevelName)
     {
-        // check if the next level name is the final level
-        if (nextLevelName == "FinalLevel")
-        {
-            // Handle winning condition, show level complete UI or any other relevant UI
-            //levelCompleteUI.SetActive(true);
-        }
-        else
-        {
-            // Load the next level
-            LoadLevel(nextLevelName);
-        }
+        LoadLevel(nextLevelName);
     }
 }
