@@ -4,16 +4,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    CapsuleCollider2D collider;
     Rigidbody2D rb;
     //Animator animator;
     SquashAndStretch squashAndStretch;
     public CameraShake shake;
+    public Transform headCheck;
+    public float headCheckLength;
 
     private NextLevel nextLevel;
     private float yVelocity;
     private Vector2 moveInput;
     private int sceneNumber;
     private bool isDialogActive; // New variable to track if dialogue is active
+
     [Header("Health")]
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float currentHealth;
@@ -74,7 +78,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float dashingCooldown = 1.5f;
     private bool canDash = true;
-    private bool isDashing; 
+    private bool isDashing;
+
+    [Header("Duck")]
+    [SerializeField]
+    Vector2 normalHeight;
+    [SerializeField] 
+    private float crouchHeight; 
+    float yInput; 
 
     [Header("Coyote Time")]
     [SerializeField]
@@ -100,12 +111,14 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        collider = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         nextLevel = FindObjectOfType<NextLevel>();
         //animator = GetComponent<Animator>();
         squashAndStretch = GetComponent<SquashAndStretch>(); 
         maxHealth = Mathf.Min(maxHealth, 100f);
         currentHealth = maxHealth;
+        normalHeight = transform.localScale; 
     }
 
     // Update is called once per frame
@@ -116,8 +129,10 @@ public class PlayerController : MonoBehaviour
         {
             // Reset movement input when paused
             horizontal = 0f;
-            return;
         }
+
+        yInput = Input.GetAxisRaw("Vertical");
+        Crouch(); 
         //BaseAnimations();
         #region Buff
         // Check if immunity has expired
@@ -225,6 +240,42 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    public void Crouch()
+    {
+        if (!IsGrounded() || isDialogActive || PauseMenu.GameIsPaused) return;
+        bool isHeadHitting = HeadDetect();
+
+        // Save the current scale
+        Vector2 currentScale = transform.localScale;
+        if (yInput < 0 || isHeadHitting)
+        {
+            // Set the player's height to the crouch height
+            transform.localScale = new Vector2(currentScale.x, crouchHeight);
+
+            if (transform.localScale.y != crouchHeight)
+                transform.localScale = new Vector2(normalHeight.x, crouchHeight);
+        }
+        else
+        {
+            if (transform.localScale.y != normalHeight.y)
+                transform.localScale = normalHeight;
+        }
+        if ((isFacingRight && currentScale.x < 0) || (!isFacingRight && currentScale.x > 0))
+        {
+            transform.localScale = new Vector2(-currentScale.x, currentScale.y);
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        Vector2 from = headCheck.position;
+        Vector2 to = new Vector2(headCheck.position.x, headCheck.position.y + headCheckLength);
+
+        Gizmos.DrawLine(from, to);
+    }
+    private bool HeadDetect()
+    {
+        return Physics.Raycast(headCheck.position, Vector2.up, headCheckLength, groundLayer); 
+    }
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
@@ -313,7 +364,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash(float dashDistance)
     {
-        squashAndStretch.SquashStretch(1.3f, 0.8f, 0.3f);
+        squashAndStretch.SquashStretch(2.2f, 0.8f, 0.3f);
         shake.ShakeCamera();
         canDash = false;
         isDashing = true;
@@ -333,6 +384,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true; 
     }
+
     public void TakeDamage(float amount)
     {
         if (currentHealth <= 0)
