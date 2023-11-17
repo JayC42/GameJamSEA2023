@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class NextLevel : MonoBehaviour
 {
     public string nextSceneName;
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -23,5 +24,7 @@ public class NextLevel : MonoBehaviour
         }
 
         yield return SceneManager.LoadSceneAsync(currentSceneName, 0);
+        // restart current level
+        print("Level reset!");
     }
 }

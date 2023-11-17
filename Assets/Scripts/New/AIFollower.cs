@@ -7,7 +7,7 @@ public class AIFollower : MonoBehaviour
     [SerializeField]
     private float targetPosition;
     [SerializeField]
-    private Transform playerTransform;
+    private float heightOffset = 2f;
     Rigidbody2D rb;
     Animator anim;
     Transform target;
@@ -29,14 +29,13 @@ public class AIFollower : MonoBehaviour
     }
     void TargetFollow()
     {
-        if (Vector2.Distance(transform.position, target.position) > targetPosition)
+        // Calculate the target position with a height offset
+        Vector2 targetPositionWithHeight = new Vector2(target.position.x, target.position.y + heightOffset);
+
+        if (Vector2.Distance(transform.position, targetPositionWithHeight) > targetPosition)
         {
-            //anim.SetBool("Running", true);
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        }
-        else
-        {
-            //anim.SetBool("Running", false);
+            // Move towards the target position with height offset
+            transform.position = Vector2.MoveTowards(transform.position, targetPositionWithHeight, speed * Time.deltaTime);
         }
     }
 }

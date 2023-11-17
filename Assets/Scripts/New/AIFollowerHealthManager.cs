@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public class AIFollowerHealthManager : MonoBehaviour
 {
+    public GameObject AIObject; 
     public float maxHealth = 100f;
     public float healthRegenRate = 2f; 
     public float healthDepletionRate = 1f;
@@ -9,6 +11,7 @@ public class AIFollowerHealthManager : MonoBehaviour
  
     public ParticleSystem regenParticle;    // Particle system for health regen
     public ParticleSystem fullyHealedParticle;    // Particle system for health 100
+    public ParticleSystem deathParticle;    // Particle system for health 100
 
     // Test
     private NextLevel nextLevel;
@@ -25,11 +28,12 @@ public class AIFollowerHealthManager : MonoBehaviour
         lightSource = transform.Find("LightSource");
         lightRange = lightSource.GetComponent<SMask>();
         nextLevel = FindObjectOfType<NextLevel>();
-
+        regenParticle.gameObject.SetActive(false);
+        fullyHealedParticle.gameObject.SetActive(false);
     }
 
     private void Update()
-    {
+    { 
         if (isInRegenZone)
         {
             RegenerateHealth();
@@ -37,6 +41,8 @@ public class AIFollowerHealthManager : MonoBehaviour
         else
         {
             DepleteHealth();
+            regenParticle.gameObject.SetActive(false);
+            fullyHealedParticle.gameObject.SetActive(false);
         }
     }
 
@@ -55,25 +61,31 @@ public class AIFollowerHealthManager : MonoBehaviour
             isInRegenZone = false;
         }
     }
-
     private void RegenerateHealth()
     {
-        if (currentHealth < maxHealth)
+        if (currentHealth >= maxHealth)
         {
-            currentHealth += healthRegenRate * Time.deltaTime;
-            currentHealth = Mathf.Min(currentHealth, maxHealth);
-            regenParticle.Play();
-        }
-        else if (currentHealth == maxHealth)
-        {
-            // Play particle effect when HP is 100
             if (!regenParticle.isPlaying)
             {
-                regenParticle.Stop();
-                fullyHealedParticle.Play();
+                // Play fullyHealedParticle when health reaches maxHealth
+                fullyHealedParticle.gameObject.SetActive(true); 
+
             }
+
+            regenParticle.gameObject.SetActive(false);
+        }
+        else
+        {
+            if (!fullyHealedParticle.isPlaying)
+            {
+                regenParticle.gameObject.SetActive(true);
+            }
+            // Increase health
+            currentHealth += healthRegenRate * Time.deltaTime;
+            currentHealth = Mathf.Min(currentHealth, maxHealth);
         }
     }
+
     private void DepleteHealth()
     {
         if (currentHealth > 0)
@@ -102,9 +114,17 @@ public class AIFollowerHealthManager : MonoBehaviour
         }
         else if (currentHealth <= 0)
         {
-            // restart current level
-            StartCoroutine(nextLevel.RestartCurrentLevel());
+            StartCoroutine(HandleDeath());
         }
+    }
+    public IEnumerator HandleDeath()
+    {
+        deathParticle.Play();
+        this.enabled = false;
+        this.GetComponentInChildren<Renderer>().enabled = false;
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(nextLevel.RestartCurrentLevel());
+        deathParticle.Stop();
     }
     public void ResetHealth()
     {

@@ -11,14 +11,16 @@ public class CameraShake : MonoBehaviour
 
     private float timer;
     private CinemachineBasicMultiChannelPerlin _cbmp;
-
+    private PlayerController PlayerController; 
     private void Awake()
     {
         CinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
+        PlayerController = FindObjectOfType<PlayerController>();
     }
 
     void Start()
     {
+        CinemachineVirtualCamera.Follow = PlayerController.transform; 
         StopShake();
     }
 

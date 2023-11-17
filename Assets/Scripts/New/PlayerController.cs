@@ -102,7 +102,8 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem moveParticles;
     [SerializeField]
     private ParticleSystem dashParticles;
-
+    [SerializeField]
+    private ParticleSystem deathParticles;
     // Buff Timers
     private bool isImmune = false;
     private float immunityTimer = 0f;
@@ -389,40 +390,29 @@ public class PlayerController : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            // restart current level
-            StartCoroutine(nextLevel.RestartCurrentLevel());
-            print("Level reset!");
+            //Instantiate(deathParticles, this.transform.position, this.transform.rotation);
+            StartCoroutine(HandleDeath());
         }
         else 
         {
             currentHealth -= amount;
-            print("taking dmg!");
+            //print("taking dmg!");
         }
 
+    }
+    public IEnumerator HandleDeath()
+    {
+        deathParticles.Play();
+        this.enabled = false;
+        this.GetComponentInChildren<Renderer>().enabled = false;
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(nextLevel.RestartCurrentLevel());
+        deathParticles.Stop();
+        //print("Player Respawn");
     }
     public void ResetHealth()
     {
         currentHealth = maxHealth;
-    }
-    // Call this method when the player reaches a checkpoint
-    private void ReachCheckpoint()
-    {
-        // Get the player's current position
-        Vector3 currentPosition = transform.position;
-
-        // Update the checkpoint in the GameManager
-        GameManager.Instance.UpdateCheckpoint(currentPosition);
-
-        Debug.Log("Checkpoint reached!");
-    }
-
-    // Call this method when the player reaches the end of a level
-    private void GoToNextLevel(string nextLevelName)
-    {
-        // Check the win condition using the GameManager
-        GameManager.Instance.NextLevel(nextLevelName);
-
-        Debug.Log("End of level reached!");
     }
 
     public void ApplyImmunity(float duration)

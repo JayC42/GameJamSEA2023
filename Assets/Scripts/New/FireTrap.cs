@@ -8,12 +8,13 @@ public class FireTrap : MonoBehaviour
     private bool isTrapActive = false;
     private float timer = 0f;
 
+    [SerializeField]
     private BoxCollider2D trapCollider;
     private ParticleSystem flameParticles;
 
     private void Start()
     {
-        trapCollider = GetComponent<BoxCollider2D>();
+        trapCollider = GetComponentInChildren<BoxCollider2D>();
         flameParticles = GetComponentInChildren<ParticleSystem>();
         if (flameParticles == null)
         {
