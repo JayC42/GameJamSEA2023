@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private int sceneNumber;
     private bool isDialogActive; // New variable to track if dialogue is active
-
+    private PlayerDamageFlash damageFlash;
+  
     [Header("Health")]
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float currentHealth;
@@ -92,6 +93,9 @@ public class PlayerController : MonoBehaviour
     private float coyoteTime = 0.3f;
     private float coyoteTimer;
 
+    private AudioSource audioSource;
+    public AudioClip[] sfx;
+
 
     [Header("Particles")]
     [SerializeField]
@@ -109,19 +113,26 @@ public class PlayerController : MonoBehaviour
     // Buff Timers
     private bool isImmune = false;
     private float immunityTimer = 0f;
+    private SpriteRenderer renderer;
 
+    public float flashDuration = 0.2f;
+    public Color flashColor = new Color(1f, 0f, 0f, 0.5f); // Red color with 50% transparency
     public int SceneNumber { get => sceneNumber; set => sceneNumber = value; }
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        renderer = GetComponentInChildren<SpriteRenderer>();
         collider = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         nextLevel = FindObjectOfType<NextLevel>();
         //animator = GetComponent<Animator>();
-        squashAndStretch = GetComponent<SquashAndStretch>(); 
+        squashAndStretch = GetComponent<SquashAndStretch>();
+        damageFlash = GetComponent<PlayerDamageFlash>();
         maxHealth = Mathf.Min(maxHealth, 100f);
         currentHealth = maxHealth;
-        normalHeight = transform.localScale; 
+        normalHeight = transform.localScale;
+
     }
 
     // Update is called once per frame
@@ -135,7 +146,7 @@ public class PlayerController : MonoBehaviour
         }
 
         yInput = Input.GetAxisRaw("Vertical");
-        Crouch(); 
+        //Crouch(); 
         //BaseAnimations();
         #region Buff
         // Check if immunity has expired
@@ -153,6 +164,7 @@ public class PlayerController : MonoBehaviour
         if (!wasGrounded && IsGrounded())
         {
             this.landParticles.Play();
+            PlaySFX(sfx[1]);
         }
         wasGrounded = IsGrounded();
 
@@ -183,6 +195,14 @@ public class PlayerController : MonoBehaviour
 
         #endregion
     }
+    public void PlaySFX(AudioClip sfx)
+    {
+        if (audioSource != null && sfx != null)
+        {
+            audioSource.PlayOneShot(sfx);
+            Debug.Log("Playing SFX: " + sfx.name);
+        }
+    }
     private void BaseAnimations()
     {
         //animator.SetFloat("Speed", Mathf.Abs(horizontal));
@@ -196,6 +216,7 @@ public class PlayerController : MonoBehaviour
 
         if (context.performed && IsGrounded())
         {
+            PlaySFX(sfx[0]);
             if (!PauseMenu.GameIsPaused)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
@@ -379,6 +400,9 @@ public class PlayerController : MonoBehaviour
         float dashVelocity = (dashDistance / dashingTime) * Mathf.Sign(transform.localScale.x);
         rb.velocity = new Vector2(dashVelocity, rb.velocity.y);
         this.dashParticles.Play();
+        //AudioManager.instance.PlaySingleSFX(AudioManager.instance.sfxClips[2]);
+        PlaySFX(sfx[2]);
+
         yield return new WaitForSeconds(dashingTime);
 
         // Stop dashing
@@ -392,7 +416,7 @@ public class PlayerController : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            //Instantiate(deathParticles, this.transform.position, this.transform.rotation);
+            //PlaySFX(sfx[5]);
             StartCoroutine(HandleDeath());
         }
         else 
@@ -402,6 +426,36 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    public void FlashRed()
+    {
+        StartCoroutine(FlashRoutine());
+    }
+
+    private IEnumerator FlashRoutine()
+    {
+        // Store the original color of the player
+        Color originalColor = renderer.color;
+
+        // Set the player color to the flash color
+        renderer.color = flashColor;
+
+        //PlaySFX(sfx[3]);
+
+        // Wait for the specified flash duration
+        yield return new WaitForSeconds(flashDuration);
+
+        // Reset the player color to the original color
+        renderer.color = originalColor;
+
+        // Make sure ResetColor is called after the coroutine completes
+        ResetColor();
+    }
+    public void ResetColor()
+    {
+        // Reset the player color to white
+        renderer.color = Color.white;
+    }
     public IEnumerator HandleDeath()
     {
         deathParticles.Play();
@@ -410,6 +464,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         StartCoroutine(nextLevel.RestartCurrentLevel());
         deathParticles.Stop();
+
         //print("Player Respawn");
     }
     public void ResetHealth()
@@ -423,6 +478,7 @@ public class PlayerController : MonoBehaviour
         immunityTimer = duration;
         // visual feedback toggle on
         protectiveBarrier.SetActive(true);
+        PlaySFX(sfx[6]);
         //Debug.Log("Player is immune to fire for " + duration + " seconds.");
     }
 
@@ -431,6 +487,7 @@ public class PlayerController : MonoBehaviour
         isImmune = false;
         // visual feedback toggle off
         protectiveBarrier.SetActive(false);
+        PlaySFX(sfx[7]);
         //Debug.Log("Player's immunity has worn off.");
     }
 

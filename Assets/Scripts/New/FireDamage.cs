@@ -5,7 +5,7 @@ public class FireDamage : MonoBehaviour
     [Range(1f, 50f)]
     public float damageRate = 20f; // Damage rate per second
     private bool isInFireRange = false;
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the colliding object is the player
@@ -36,6 +36,8 @@ public class FireDamage : MonoBehaviour
             {
                 // Damage the player continuously if not immune
                 player.TakeDamage(damageRate * Time.deltaTime);
+                player.FlashRed();
+                //player.PlaySFX(player.sfx[3]); 
             }
         }
     }

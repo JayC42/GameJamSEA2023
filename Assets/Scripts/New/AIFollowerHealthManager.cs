@@ -12,7 +12,8 @@ public class AIFollowerHealthManager : MonoBehaviour
     public ParticleSystem regenParticle;    // Particle system for health regen
     public ParticleSystem fullyHealedParticle;    // Particle system for health 100
     public ParticleSystem deathParticle;    // Particle system for health 100
-
+    private AudioSource audioSource;
+    public AudioClip[] sfx;
     // Test
     private NextLevel nextLevel;
     private Transform lightSource;
@@ -22,6 +23,7 @@ public class AIFollowerHealthManager : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         // Ensure maxHealth doesn't exceed 100
         maxHealth = Mathf.Min(maxHealth, 100f);
         currentHealth = maxHealth;
@@ -45,7 +47,14 @@ public class AIFollowerHealthManager : MonoBehaviour
             fullyHealedParticle.gameObject.SetActive(false);
         }
     }
-
+    public void PlaySFX(AudioClip sfx)
+    {
+        if (audioSource != null && sfx != null)
+        {
+            audioSource.PlayOneShot(sfx);
+            Debug.Log("Playing SFX: " + sfx.name);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("RegenZone"))
@@ -68,8 +77,8 @@ public class AIFollowerHealthManager : MonoBehaviour
             if (!regenParticle.isPlaying)
             {
                 // Play fullyHealedParticle when health reaches maxHealth
-                fullyHealedParticle.gameObject.SetActive(true); 
-
+                fullyHealedParticle.gameObject.SetActive(true);
+                PlaySFX(sfx[1]);
             }
 
             regenParticle.gameObject.SetActive(false);
@@ -79,10 +88,22 @@ public class AIFollowerHealthManager : MonoBehaviour
             if (!fullyHealedParticle.isPlaying)
             {
                 regenParticle.gameObject.SetActive(true);
+                //PlaySFX(sfx[0]);
             }
             // Increase health
             currentHealth += healthRegenRate * Time.deltaTime;
             currentHealth = Mathf.Min(currentHealth, maxHealth);
+
+            if (currentHealth <= 1) { lightSource.localScale = new Vector3(1.0f, 1.0f, 1.0f); }
+            else if (currentHealth <= 20 && currentHealth > 10) { lightSource.localScale = new Vector3(1.5f, 1.5f, 1.5f); }
+            else if (currentHealth <= 30 && currentHealth > 20) { lightSource.localScale = new Vector3(2.0f, 2.0f, 2.0f); }
+            else if (currentHealth <= 40 && currentHealth > 30) { lightSource.localScale = new Vector3(2.5f, 2.5f, 2.5f); }
+            else if (currentHealth <= 50 && currentHealth > 40) { lightSource.localScale = new Vector3(3.0f, 3.0f, 3.0f); }
+            else if (currentHealth <= 60 && currentHealth > 50) { lightSource.localScale = new Vector3(3.5f, 3.5f, 3.5f); }
+            else if (currentHealth <= 70 && currentHealth > 60) { lightSource.localScale = new Vector3(4.0f, 4.0f, 4.0f); }
+            else if (currentHealth <= 80 && currentHealth > 70) { lightSource.localScale = new Vector3(4.5f, 4.5f, 4.5f); }
+            else if (currentHealth <= 100 && currentHealth > 80) { lightSource.localScale = new Vector3(5.0f, 5.0f, 5.0f); }
+
         }
     }
 
@@ -106,7 +127,7 @@ public class AIFollowerHealthManager : MonoBehaviour
             { 
                 lightSource.localScale = new Vector3(0, 0, 0); 
             }
-
+    
             // Flicker light range variable gradually
             //lightRange.flickTime += lightDepletionRate * Time.deltaTime;
             //lightRange.flickTime = Mathf.Clamp(lightRange.flickTime, 0.05f, 0.5f);
@@ -120,6 +141,7 @@ public class AIFollowerHealthManager : MonoBehaviour
     public IEnumerator HandleDeath()
     {
         deathParticle.Play();
+
         this.enabled = false;
         this.GetComponentInChildren<Renderer>().enabled = false;
         yield return new WaitForSeconds(1f);

@@ -8,6 +8,12 @@ public class PressureSwitch : MonoBehaviour
     [SerializeField] private int objectOnPlate;
     public int ObjectOnPlate => objectOnPlate;
     public bool plateIsActive => objectOnPlate == 1;
+    private AudioSource audioSource;
+    public AudioClip activatedSFX;
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private void Update()
     {
         if (plateIsActive)
@@ -26,6 +32,7 @@ public class PressureSwitch : MonoBehaviour
         if (ArrayContains(requiredObjects, other.gameObject))
         {
             objectOnPlate++;
+            audioSource.PlayOneShot(activatedSFX);
         }
     }
 
@@ -35,6 +42,7 @@ public class PressureSwitch : MonoBehaviour
         if (ArrayContains(requiredObjects, other.gameObject))
         {
             objectOnPlate--;
+            
         }
     }
 

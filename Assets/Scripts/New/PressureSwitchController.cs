@@ -5,7 +5,12 @@ public class PressureSwitchController : MonoBehaviour
     public GameObject door; // Reference to the door that should be opened
     public bool doorisOpened = false;
     public int maxObjectOnPlate = 2;
-
+    private AudioSource audioSource;
+    public AudioClip doorOpenSFX;
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private void Update()
     {
         CheckPressurePlates();
@@ -29,6 +34,7 @@ public class PressureSwitchController : MonoBehaviour
         {
             door.SetActive(false); // Set the door to inactive
             doorisOpened = true;
+            audioSource.PlayOneShot(doorOpenSFX); 
         }
         else
         {

@@ -6,7 +6,12 @@ using UnityEngine.SceneManagement;
 public class NextLevel : MonoBehaviour
 {
     public string nextSceneName;
-
+    public AudioClip respawnSFX; 
+    private AudioSource audioSource; 
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -22,7 +27,7 @@ public class NextLevel : MonoBehaviour
             Debug.LogError("currentLevel is not set. Cannot reload level.");
             yield break;
         }
-
+        audioSource.PlayOneShot(respawnSFX);
         yield return SceneManager.LoadSceneAsync(currentSceneName, 0);
         // restart current level
         print("Level reset!");
