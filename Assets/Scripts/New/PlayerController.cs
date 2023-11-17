@@ -104,6 +104,8 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem dashParticles;
     [SerializeField]
     private ParticleSystem deathParticles;
+    [SerializeField]
+    private GameObject protectiveBarrier;
     // Buff Timers
     private bool isImmune = false;
     private float immunityTimer = 0f;
@@ -419,22 +421,19 @@ public class PlayerController : MonoBehaviour
     {
         isImmune = true;
         immunityTimer = duration;
-
-        // You might want to play a particle effect or apply any visual feedback here
-        // For example: PlayParticleEffect();
-
-        Debug.Log("Player is immune to fire for " + duration + " seconds.");
+        // visual feedback toggle on
+        protectiveBarrier.SetActive(true);
+        //Debug.Log("Player is immune to fire for " + duration + " seconds.");
     }
 
     private void EndImmunity()
     {
         isImmune = false;
-
-        // You might want to stop any visual effects or animations associated with immunity here
-        // For example: StopParticleEffect();
-
-        Debug.Log("Player's immunity has worn off.");
+        // visual feedback toggle off
+        protectiveBarrier.SetActive(false);
+        //Debug.Log("Player's immunity has worn off.");
     }
+
 
     public bool IsImmune
     {
