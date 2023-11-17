@@ -5802,6 +5802,7 @@ MonoBehaviour:
   musicSource: {fileID: 131265433}
   SFXSource: {fileID: 0}
   BGM: {fileID: 8300000, guid: eec795cfbf9721144a7819339999d821, type: 3}
+  sfxClips: []
 --- !u!4 &510096791
 Transform:
   m_ObjectHideFlags: 0
@@ -16256,6 +16257,89 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1023590045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1023590046}
+  - component: {fileID: 1023590047}
+  m_Layer: 0
+  m_Name: CamBounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1023590046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023590045}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.1889305, y: 0.54139423, z: 3.8911808}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1023590047
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023590045}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 7.9336967, y: 2.753148}
+      - {x: 7.883705, y: 3.1592312}
+      - {x: -20.648521, y: 3.1667037}
+      - {x: -20.599516, y: -3.913617}
+      - {x: -20.589941, y: -11.347012}
+      - {x: 7.930896, y: -11.340788}
+  m_UseDelaunayMesh: 0
 --- !u!1 &1171249816
 GameObject:
   m_ObjectHideFlags: 3
@@ -16495,6 +16579,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1346660306}
   - component: {fileID: 1346660305}
+  - component: {fileID: 1346660307}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -16524,7 +16609,7 @@ MonoBehaviour:
   m_Follow: {fileID: 196418621}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 6
+    OrthographicSize: 4
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -16557,6 +16642,23 @@ Transform:
   - {fileID: 1171249817}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1346660307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346660304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2fba25a5cd15594e8f050a11e386c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ConfineMode: 0
+  m_BoundingVolume: {fileID: 0}
+  m_BoundingShape2D: {fileID: 1023590047}
+  m_ConfineScreenEdges: 1
+  m_Damping: 0
 --- !u!1 &1379113656
 GameObject:
   m_ObjectHideFlags: 0
@@ -21663,11 +21765,15 @@ MonoBehaviour:
   normalHeight: {x: 0, y: 0}
   crouchHeight: 0
   coyoteTime: 0.3
+  sfx: []
   jumpParticles: {fileID: 680876671}
   landParticles: {fileID: 2097509916}
   moveParticles: {fileID: 2056970124}
   dashParticles: {fileID: 175654693}
   deathParticles: {fileID: 0}
+  protectiveBarrier: {fileID: 0}
+  flashDuration: 0.2
+  flashColor: {r: 1, g: 0, b: 0, a: 0.5}
 --- !u!70 &1512226683
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -21937,7 +22043,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -21962,7 +22068,7 @@ Transform:
   m_GameObject: {fileID: 1539453856}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.73, y: -0.01, z: -10}
+  m_LocalPosition: {x: -6.9347897, y: -0.29582977, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -39660,6 +39766,7 @@ MonoBehaviour:
   regenParticle: {fileID: 0}
   fullyHealedParticle: {fileID: 0}
   deathParticle: {fileID: 0}
+  sfx: []
   currentHealth: 0
 --- !u!114 &9215066399895974774
 MonoBehaviour:
@@ -39682,6 +39789,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1539453859}
   - {fileID: 1346660306}
+  - {fileID: 1023590046}
   - {fileID: 2099766995}
   - {fileID: 1560272903}
   - {fileID: 1306170658}

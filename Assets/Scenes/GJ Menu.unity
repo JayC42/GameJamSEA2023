@@ -155,6 +155,7 @@ MonoBehaviour:
   musicSource: {fileID: 1635137081}
   SFXSource: {fileID: 0}
   BGM: {fileID: 8300000, guid: 94571b3b51e32b8459f65eb19ec6ec2e, type: 3}
+  sfxClips: []
 --- !u!4 &134403034
 Transform:
   m_ObjectHideFlags: 0
@@ -1253,7 +1254,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -196.8}
+  m_AnchoredPosition: {x: 252, y: -260.3}
   m_SizeDelta: {x: 1000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1796970241
