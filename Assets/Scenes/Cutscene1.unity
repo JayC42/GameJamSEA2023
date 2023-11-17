@@ -554,7 +554,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -115, y: -51}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &644387428
 MonoBehaviour:
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: dd0d640f35a24fe4e82a58a0a813f681, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1090,6 +1090,7 @@ MonoBehaviour:
   musicSource: {fileID: 1157005266}
   SFXSource: {fileID: 0}
   BGM: {fileID: 8300000, guid: d85ad158cc15d8843be8a2b22409185f, type: 3}
+  sfxClips: []
 --- !u!4 &1389702250
 Transform:
   m_ObjectHideFlags: 0
@@ -1516,7 +1517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1759464389
 RectTransform:
   m_ObjectHideFlags: 0
