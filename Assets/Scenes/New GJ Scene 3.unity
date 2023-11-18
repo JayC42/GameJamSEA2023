@@ -357,6 +357,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3802644676929629756, guid: 0d92c9007fdda304593a1de0fdf1dd42, type: 3}
+      propertyPath: m_Size.x
+      value: 0.69010544
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802644676929629756, guid: 0d92c9007fdda304593a1de0fdf1dd42, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.00592041
+      objectReference: {fileID: 0}
     - target: {fileID: 4177605572912868475, guid: 0d92c9007fdda304593a1de0fdf1dd42, type: 3}
       propertyPath: psc
       value: 
@@ -4438,11 +4446,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6870198223945114106, guid: c560935b08a7d2c42a0d2803b181527f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.055
+      value: -11.346
       objectReference: {fileID: 0}
     - target: {fileID: 6870198223945114106, guid: c560935b08a7d2c42a0d2803b181527f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1126
+      value: -0.432
       objectReference: {fileID: 0}
     - target: {fileID: 6870198223945114106, guid: c560935b08a7d2c42a0d2803b181527f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5478,8 +5486,10 @@ PolygonCollider2D:
       - {x: 5.5892434, y: 3.3562732}
       - {x: 5.6761756, y: 3.4106793}
       - {x: 5.8456497, y: 3.3601809}
-      - {x: 6.152583, y: 3.1472569}
-      - {x: 7.5227833, y: 3.0726533}
+      - {x: 6.321847, y: 3.209947}
+      - {x: 6.686425, y: 3.2380435}
+      - {x: 6.9741225, y: 3.3721333}
+      - {x: 7.508633, y: 3.475606}
   m_UseDelaunayMesh: 0
 --- !u!1001 &1234255235
 PrefabInstance:
@@ -5627,9 +5637,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 8.061243, y: 0.99155754}
-      - {x: 5.7643003, y: 1.0003471}
-      - {x: 6.154494, y: 0.5156674}
-      - {x: 7.1041355, y: 0.5445689}
+      - {x: 5.7180247, y: 1.0003471}
+      - {x: 6.015668, y: 0.7007684}
+      - {x: 7.09488, y: 0.6833947}
       - {x: 8.074876, y: 0.8336163}
       - {x: 8.369119, y: 0.6595802}
       - {x: 8.474788, y: 0.5592391}
@@ -6611,11 +6621,11 @@ PolygonCollider2D:
       - {x: 10.064592, y: -0.52736485}
       - {x: 10.060468, y: -1.158826}
       - {x: 11.009761, y: -1.1637609}
-      - {x: 10.9972515, y: -2.0053744}
-      - {x: 8.51279, y: -1.9973187}
-      - {x: 8.970787, y: -2.4757862}
-      - {x: 10.325448, y: -2.4819164}
-      - {x: 10.773688, y: -2.30186}
+      - {x: 10.9972515, y: -2.0364485}
+      - {x: 8.69382, y: -2.0414875}
+      - {x: 8.916749, y: -2.2814782}
+      - {x: 10.334959, y: -2.2928934}
+      - {x: 10.773688, y: -2.2894304}
       - {x: 10.99619, y: -2.2069097}
       - {x: 10.990337, y: -4.48965}
       - {x: -0.0007256903, y: -4.5107336}
@@ -7463,7 +7473,7 @@ Transform:
   m_GameObject: {fileID: 2027997296}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.76, y: -2.02, z: 0}
+  m_LocalPosition: {x: 0.26, y: -2.02, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7520,7 +7530,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5680039}
+  m_Offset: {x: 0.01185745, y: -0.5640516}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -7531,7 +7541,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.27944565, y: 0.24635649}
+  m_Size: {x: 0.74583995, y: 0.25426102}
   m_EdgeRadius: 0
 --- !u!60 &2027997300
 PolygonCollider2D:
