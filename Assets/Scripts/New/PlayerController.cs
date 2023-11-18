@@ -389,7 +389,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Dash(float dashDistance)
     {
         squashAndStretch.SquashStretch(2.2f, 0.8f, 0.3f);
-        shake.ShakeCamera();
+        if (shake!= null) shake.ShakeCamera();
         canDash = false;
         isDashing = true;
 

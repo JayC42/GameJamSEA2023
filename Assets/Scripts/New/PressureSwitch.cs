@@ -10,6 +10,7 @@ public class PressureSwitch : MonoBehaviour
     public bool plateIsActive => objectOnPlate == 1;
     private AudioSource audioSource;
     public AudioClip activatedSFX;
+    private bool plateIsTriggered = false; 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -24,6 +25,11 @@ public class PressureSwitch : MonoBehaviour
         {
             psc.doorisOpened = false;
         }
+
+        if (plateIsTriggered)
+        {
+            audioSource.PlayOneShot(activatedSFX);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -32,7 +38,7 @@ public class PressureSwitch : MonoBehaviour
         if (ArrayContains(requiredObjects, other.gameObject))
         {
             objectOnPlate++;
-            audioSource.PlayOneShot(activatedSFX);
+            plateIsTriggered = true; 
         }
     }
 
@@ -42,7 +48,7 @@ public class PressureSwitch : MonoBehaviour
         if (ArrayContains(requiredObjects, other.gameObject))
         {
             objectOnPlate--;
-            
+            plateIsTriggered = false;
         }
     }
 
